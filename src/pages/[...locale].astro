@@ -28,7 +28,7 @@ const titles = {
 <SiteLayout page="home" locale={locale} title={titles[locale]}>
   <!-- <RoadSideTrack client:load transition:persist="home-road-side-track" transition:persist-props /> -->
   <FreeFlow client:load locale={locale} transition:persist="home-free-flow" transition:persist-props />
-  <DevelopmentRibbon locale={locale}>
+  <DevelopmentRibbon locale={locale} enabled={false}>
     <Tariffs client:load locale={locale} />
   </DevelopmentRibbon>
   <RouteMap client:visible={{ rootMargin: "300px" }} locale={locale} />
