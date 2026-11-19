@@ -5,7 +5,7 @@ import safetyIcon from "../../../assets/icons/home/security-shield.svg?url";
 import paymentIcon from "../../../assets/icons/home/payment-card.svg?url";
 import tariffsIcon from "../../../assets/icons/home/tariff-coins.svg?url";
 import trafficIcon from "../../../assets/icons/home/traffic-cone.svg?url";
-import towTruck from "../../../assets/pages/home/road/tow-truck.webp";
+import documentFolder from "../../../assets/pages/home/road/news/document-folder.webp";
 import policeCar from "../../../assets/pages/home/road/police-car.png";
 import securityCamera from "../../../assets/pages/home/road/security-camera.png";
 import bankCard from "../../../assets/pages/home/road/bank-card.png";
@@ -52,9 +52,9 @@ export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFo
         >
           <img
             class={styles.art}
-            src={towTruck.src}
-            width={towTruck.width}
-            height={towTruck.height}
+            src={documentFolder.src}
+            width={documentFolder.width}
+            height={documentFolder.height}
             alt=""
             loading="lazy"
             decoding="async"
