@@ -1,0 +1,38 @@
+---
+import RoadSideTrack from "../components/common/RoadSideTrack/RoadSideTrack";
+import { DevelopmentRibbon } from "../components/common/DevelopmentRibbon/DevelopmentRibbon";
+import { AboutCompany } from "../components/home/AboutCompany/AboutCompany";
+import { AboutRoad } from "../components/home/AboutRoad/AboutRoad";
+import { Contacts } from "../components/home/Contacts/Contacts";
+import FreeFlow from "../components/home/FreeFlow/FreeFlow";
+import Tariffs from "../components/home/Tariffs/Tariffs";
+import RouteMap from "../components/home/RouteMap/RouteMap";
+import SiteLayout from "../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined } },
+    { params: { locale: "en" } },
+  ];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "ru";
+const notFoundHref = locale === "en" ? `${import.meta.env.BASE_URL}en/404/` : `${import.meta.env.BASE_URL}404.html`;
+const maintenanceHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/maintenance/" : "maintenance/"}`;
+const titles = {
+  ru: "РусДор Телематика",
+  en: "RusDor Telematika",
+};
+---
+
+<SiteLayout page="home" locale={locale} title={titles[locale]}>
+  <!-- <RoadSideTrack client:load transition:persist="home-road-side-track" transition:persist-props /> -->
+  <FreeFlow client:load locale={locale} transition:persist="home-free-flow" transition:persist-props />
+  <DevelopmentRibbon locale={locale}>
+    <Tariffs client:load locale={locale} />
+  </DevelopmentRibbon>
+  <RouteMap client:visible={{ rootMargin: "300px" }} locale={locale} />
+  <AboutRoad locale={locale} notFoundHref={notFoundHref} />
+  <AboutCompany locale={locale} href={maintenanceHref} />
+  <Contacts locale={locale} />
+</SiteLayout>

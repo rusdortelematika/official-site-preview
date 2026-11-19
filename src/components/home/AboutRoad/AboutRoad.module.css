@@ -1,0 +1,324 @@
+.section {
+  width: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin-inline: auto;
+  color: var(--color-rdt-ink);
+  font-family: var(--font-rdt);
+}
+
+.heading {
+  margin-block-end: 14px;
+  font-size: var(--text-rdt-title);
+  font-weight: 700;
+  line-height: var(--text-rdt-title--line-height);
+  text-align: center;
+}
+
+.roadGrid {
+  display: grid;
+  gap: 12px;
+  --card-title-line-height: 25px;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    "emergency emergency"
+    "police police"
+    "safety safety"
+    "payment tariffs"
+    "traffic traffic";
+  grid-template-rows: minmax(290px, auto) minmax(152px, auto) minmax(158px, auto) minmax(170px, auto) minmax(148px, auto);
+}
+
+.emergency {
+  --card-radius: var(--radius-rdt-card-compact);
+  --card-top: 17px;
+  --card-icon-size: 28px;
+  --card-icon-scale: 84.625%;
+  --card-icon-offset: 1px;
+  --card-label-gap: 14px;
+  --card-number-size: 47px;
+  --card-number-line-height: 52px;
+  --card-title-line-height: 24px;
+  --art-width: 61.14%;
+  --art-right: 8px;
+  --art-bottom: 5px;
+
+  grid-area: emergency;
+}
+
+.police {
+  --art-width: 49.14%;
+  --art-bottom: 12px;
+  --art-ratio: 172 / 98.6;
+
+  grid-area: police;
+}
+
+.safety,
+.tariffs {
+  --card-icon-scale: 83%;
+}
+
+.safety {
+  --art-width: 28%;
+  --art-ratio: 98 / 96.23;
+
+  grid-area: safety;
+}
+
+.payment,
+.tariffs {
+  --card-top: 12px;
+  --card-inset: 12px;
+  --card-icon-size: 21px;
+  --card-label-gap: 10px;
+  --card-title-size: 18px;
+  --card-title-line-height: 22px;
+  --card-arrow-size: 32px;
+  --card-arrow-bottom: 14px;
+}
+
+.payment {
+  --card-icon-scale: 87%;
+  --art-width: 60.355%;
+  --art-right: -7px;
+  --art-bottom: -7px;
+  --art-ratio: 230 / 165;
+
+  grid-area: payment;
+}
+
+.tariffs {
+  --art-width: 56.8%;
+  --art-right: -5px;
+  --art-top: 86.55px;
+  --art-bottom: auto;
+  --art-ratio: 211 / 160;
+
+  grid-area: tariffs;
+}
+
+.traffic {
+  --card-icon-scale: 91%;
+  --art-width: 30%;
+  --art-right: 20px;
+  --art-bottom: -9px;
+  --art-ratio: 176 / 213;
+
+  grid-area: traffic;
+}
+
+.art {
+  position: absolute;
+  inset-block: var(--art-top, auto) var(--art-bottom, 14px);
+  inset-inline-end: var(--art-right, 14px);
+  display: block;
+  inline-size: var(--art-width);
+  aspect-ratio: var(--art-ratio, auto);
+}
+
+.art > img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.cardBacking {
+  position: absolute;
+  inset-block-start: -9.4%;
+  inset-inline-start: 11.2%;
+  inline-size: 86.09%;
+  aspect-ratio: 198 / 123;
+  border-radius: 6.56% / 10.57%;
+  background-color: var(--color-rdt-action);
+  rotate: -7deg;
+  z-index: -1;
+}
+
+.art > .coinLeft,
+.art > .coinRight {
+  position: absolute;
+  block-size: auto;
+}
+
+.art > .coinLeft {
+  inset-block-start: 86.875%;
+  inset-inline-start: 22.75%;
+  inline-size: 26.54%;
+}
+
+.art > .coinRight {
+  inset-block-start: 75%;
+  inset-inline-start: 52.13%;
+  inline-size: 25.12%;
+}
+
+@media (min-width: 768px) {
+  .section {
+    --card-inset: 18px;
+    --card-top: 18px;
+  }
+
+  .heading {
+    margin-block-end: 18px;
+  }
+
+  .roadGrid {
+    gap: 16px;
+    --card-radius: var(--radius-rdt-card-compact);
+    --card-arrow-size: 38px;
+    --card-arrow-bottom: 17px;
+    --card-label-gap: 9px;
+    --card-title-line-height: var(--text-rdt-card--line-height);
+
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+      "emergency emergency emergency police police police"
+      "emergency emergency emergency safety safety safety"
+      "payment payment tariffs tariffs traffic traffic";
+    grid-template-rows: repeat(2, minmax(179px, auto)) minmax(178px, auto);
+  }
+
+  .emergency {
+    --card-radius: var(--radius-rdt-card);
+    --card-inset: 20px;
+    --card-top: 24px;
+    --card-icon-offset: -3px;
+    --card-arrow-size: 40px;
+    --card-arrow-bottom: 20px;
+    --card-label-gap: 19px;
+    --card-number-size: 56px;
+    --card-number-line-height: 60px;
+    --card-title-size: 25px;
+    --card-title-line-height: 30px;
+    --art-width: 68.06%;
+    --art-right: 10px;
+    --art-bottom: 14px;
+  }
+
+  .police {
+    --art-width: 48.89%;
+  }
+
+  .safety {
+    --art-width: 29.167%;
+    --art-right: 12px;
+  }
+
+  .payment,
+.tariffs {
+    --card-inset: 18px;
+    --card-top: 18px;
+    --card-icon-size: 24px;
+    --card-label-gap: 9px;
+    --card-title-size: var(--text-rdt-card);
+    --card-title-line-height: var(--text-rdt-card--line-height);
+    --card-arrow-size: 38px;
+    --card-arrow-bottom: 17px;
+  }
+
+  .payment {
+    --art-width: 54.55%;
+    --art-right: -5px;
+  }
+
+  .tariffs {
+    --art-width: 53.69%;
+    --art-right: -3px;
+    --art-top: 67.54px;
+  }
+
+  .traffic {
+    --art-width: 46.875%;
+    --art-right: 8px;
+  }
+}
+
+@media (min-width: 1120px) {
+  .section {
+    --card-inset: 32px;
+    --card-top: 28px;
+    --card-radius: var(--radius-rdt-card);
+    --card-arrow-bottom: 24px;
+  }
+
+  .heading {
+    margin-block-end: 16px;
+  }
+
+  .roadGrid {
+    gap: 24px;
+    --card-shadow: 0 9px 21px rgb(36 93 170 / 6%);
+    --card-radius: var(--radius-rdt-card);
+    --card-arrow-size: 40px;
+    --card-arrow-bottom: 24px;
+    --card-arrow-border: 1.2px;
+    --card-icon-size: 33px;
+
+    grid-template-columns: repeat(2, minmax(0, 206fr)) repeat(2, minmax(0, 208fr)) repeat(2, minmax(0, 206fr));
+    grid-template-rows: repeat(3, minmax(208px, auto));
+  }
+
+  .emergency {
+    --card-inset: 32px;
+    --card-top: 32px;
+    --card-icon-size: 56px;
+    --card-icon-offset: 0px;
+    --card-arrow-bottom: 24px;
+    --card-label-gap: 16px;
+    --card-mark-gap: 16px;
+    --card-number-size: var(--text-rdt-display);
+    --card-number-line-height: var(--text-rdt-display--line-height);
+    --card-title-size: var(--text-rdt-card);
+    --card-title-line-height: var(--text-rdt-card--line-height);
+    --art-width: 61.98%;
+    --art-right: 17px;
+    --art-bottom: 5px;
+  }
+
+  .police {
+    --card-icon-size: 35px;
+    --card-label-gap: 17px;
+    --art-width: 47.006%;
+    --art-right: 17.964%;
+    --art-bottom: 5px;
+  }
+
+  .safety {
+    --card-label-gap: 11px;
+    --art-width: 24.85%;
+    --art-right: 18.114%;
+    --art-bottom: 11px;
+  }
+
+  .payment,
+.tariffs {
+    --card-inset: 32px;
+    --card-top: 28px;
+    --card-arrow-size: 40px;
+    --card-arrow-bottom: 24px;
+  }
+
+  .payment {
+    --card-icon-size: 34px;
+    --card-label-gap: 10px;
+    --art-width: 52.75%;
+    --art-right: 18px;
+    --art-bottom: -32px;
+  }
+
+  .tariffs {
+    --card-icon-size: 33px;
+    --card-label-gap: 19px;
+    --art-width: 47.955%;
+    --art-right: 9%;
+    --art-top: 35px;
+  }
+
+  .traffic {
+    --card-icon-size: 34px;
+    --card-label-gap: 18px;
+    --art-width: 40.37%;
+    --art-right: 13.76%;
+    --art-bottom: -27px;
+  }
+}

@@ -1,0 +1,181 @@
+.viewport {
+  --side-road-car-width: 11px;
+  --side-road-width: calc(var(--side-road-car-width) + 4px);
+  --side-road-offset: 6px;
+  --side-road-fill: #e0ecf5;
+  --side-road-edge: #d6e5f0;
+  --side-road-marking-width: 2px;
+
+  position: fixed;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  overflow: clip;
+  visibility: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viewport[data-ready] {
+  visibility: visible;
+}
+
+.track {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: var(--side-road-offset);
+  inline-size: var(--side-road-width);
+  block-size: var(--side-road-height, 100%);
+  transform: translateY(var(--side-road-scroll, 0px));
+}
+
+.surface {
+  position: absolute;
+  inset: 0;
+  border-inline: 1px solid var(--side-road-edge);
+  background: repeating-linear-gradient(to bottom, #fff 0 9px, transparent 9px 18px)
+    center / var(--side-road-marking-width) 100% no-repeat var(--side-road-fill);
+  mask-image: linear-gradient(transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+
+.car {
+  position: absolute;
+  inset-block-start: clamp(0px, 20vh, calc(100% - var(--side-road-car-width) * 1.896));
+  inset-inline-start: 50%;
+  inline-size: var(--side-road-car-width);
+  aspect-ratio: 96 / 182;
+  margin-inline-start: calc(var(--side-road-car-width) / -2);
+  background: url("../../../assets/components/road-side-track/car-top.webp") center / 225% auto no-repeat;
+  opacity: 0.92;
+}
+
+.grove,
+.gantry,
+.lamp,
+.guardrail,
+.stream,
+.marker {
+  position: absolute;
+  transform: translateY(-50%);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.guardrail {
+  inset-block-start: 31%;
+  inset-inline-start: 100%;
+  inline-size: 4px;
+  block-size: 35px;
+  transform: translateY(-50%) scaleX(-1);
+  background: url("../../../assets/components/road-side-track/decor/guardrail.svg") center / 100% 100% no-repeat;
+}
+
+.stream {
+  inset-block-start: 58%;
+  inset-inline: -5px;
+  block-size: 24px;
+  background-image: url("../../../assets/components/road-side-track/decor/stream.svg");
+  background-size: 100% auto;
+}
+
+.marker {
+  inset-block-start: 88%;
+  inset-inline-start: calc(100% + 1px);
+  inline-size: 12px;
+  block-size: 16px;
+  background-image: url("../../../assets/components/road-side-track/decor/marker.svg");
+  background-size: contain;
+  opacity: 0.85;
+}
+
+.grove {
+  inset-block-start: 17%;
+  inset-inline-start: calc(100% + 2px);
+  inline-size: 14px;
+  block-size: 28px;
+  background-image: url("../../../assets/components/road-side-track/decor/grove.svg");
+  background-size: contain;
+  opacity: 0.8;
+}
+
+.gantry {
+  inset-block-start: 43%;
+  inset-inline: -3px;
+  block-size: 11px;
+  background-image: url("../../../assets/components/road-side-track/decor/gantry.webp");
+  background-size: 100% auto;
+  opacity: 0.86;
+}
+
+.lamp {
+  inset-block-start: 74%;
+  inset-inline-start: calc(100% - 5px);
+  inline-size: 15px;
+  block-size: 15px;
+  transform: translateY(-50%) scaleX(-1);
+  background-image: url("../../../assets/components/road-side-track/decor/lamp.svg");
+  background-size: contain;
+  opacity: 0.85;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .viewport[data-scroll-active] .car {
+    inset-block-start: 0;
+    transform: translateY(var(--side-road-car-y));
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .viewport {
+    --side-road-offset: 3px;
+  }
+
+  .grove {
+    inline-size: 12px;
+    block-size: 24px;
+  }
+
+  .stream {
+    inset-inline: -3px -5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .viewport {
+    --side-road-offset: 2px;
+    --side-road-car-width: 8px;
+    --side-road-marking-width: 1px;
+  }
+
+  .grove {
+    inset-inline-start: calc(100% - 2px);
+    inline-size: 8px;
+    block-size: 16px;
+  }
+
+  .gantry {
+    inset-inline: -2px;
+    block-size: 8px;
+  }
+
+  .lamp {
+    inline-size: 11px;
+    block-size: 11px;
+  }
+
+  .guardrail {
+    inline-size: 3px;
+    block-size: 24px;
+  }
+
+  .stream {
+    inset-inline: -2px -6px;
+    block-size: 18px;
+  }
+
+  .marker {
+    inset-inline-start: calc(100% - 3px);
+    inline-size: 9px;
+    block-size: 13px;
+  }
+}

@@ -1,0 +1,141 @@
+.footer {
+  position: relative;
+  inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin-block: 48px 40px;
+  margin-inline: auto;
+  padding-block-start: 24px;
+  color: var(--color-rdt-ink);
+  font-family: var(--font-rdt);
+  font-size: var(--text-rdt-body);
+  line-height: var(--text-rdt-body--line-height);
+}
+
+.divider {
+  position: absolute;
+  inset-block-start: -2px;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 2px;
+}
+
+.identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.brand,
+.email {
+  font-size: var(--text-rdt-value);
+  line-height: var(--text-rdt-value--line-height);
+  font-weight: 700;
+}
+
+.copyright {
+  color: var(--color-rdt-muted);
+  text-align: center;
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin-block-start: 32px;
+  color: var(--color-rdt-primary);
+  font-size: var(--text-rdt-action);
+  line-height: var(--text-rdt-action--line-height);
+  font-weight: 600;
+}
+
+.column {
+  display: grid;
+  gap: 16px;
+}
+
+.contacts {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-block-start: 24px;
+}
+
+.social,
+.maxLogo,
+.vkLogo {
+  display: block;
+  flex: none;
+}
+
+.maxLogo,
+.vkLogo {
+  block-size: 32px;
+  background-color: currentColor;
+  mask-position: center;
+  mask-repeat: no-repeat;
+}
+
+.maxLogo {
+  inline-size: 100px;
+  mask-image: url("../../../assets/images/brand/max-logo.svg");
+}
+
+.vkLogo {
+  inline-size: 184px;
+  mask-image: url("../../../assets/images/brand/vk-logo.svg");
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.emailIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 7px;
+  background-color: currentColor;
+}
+
+.footer a {
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.footer a:hover {
+  color: var(--color-rdt-action);
+}
+
+.footer a[href]:focus-visible {
+  outline: 2px solid var(--color-rdt-primary);
+  outline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .navigation {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+  }
+
+  .contacts {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .email {
+    min-inline-size: 0;
+    overflow-wrap: anywhere;
+  }
+}

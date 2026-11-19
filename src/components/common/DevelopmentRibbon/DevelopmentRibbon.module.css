@@ -1,0 +1,43 @@
+.wrapper {
+  position: relative;
+  min-inline-size: 0;
+  border-radius: var(--radius-rdt-card);
+}
+
+.overlay {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  container-type: inline-size;
+  pointer-events: none;
+  user-select: none;
+}
+
+.tape {
+  position: absolute;
+  inset-block-start: var(--ribbon-position);
+  inset-inline-start: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 2.94cqw, 40px);
+  inline-size: 160%;
+  block-size: clamp(28px, 3.235cqw, 44px);
+  overflow: hidden;
+  translate: -50% -50%;
+  rotate: var(--ribbon-angle);
+  background-color: #f9cd46;
+  color: #000;
+  font-family: var(--font-rdt);
+  font-size: clamp(14px, 1.765cqw, 24px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
+
+.tape span {
+  flex: none;
+}

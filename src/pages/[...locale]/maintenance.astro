@@ -1,0 +1,259 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import roadworkScene from "../../assets/pages/maintenance/roadwork-scene.webp";
+import craneLoad from "../../assets/pages/maintenance/crane-load.webp";
+import reloadIcon from "../../assets/pages/maintenance/reload.svg?url";
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined } },
+    { params: { locale: "en" } },
+  ];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "ru";
+const copy = {
+  ru: {
+    title: "Технические работы",
+    status: "Сайт временно недоступен.",
+    detail: "Попробуйте зайти чуть позже.",
+    reload: "Обновить страницу",
+    scene: "Ограждения перекрывают дорогу, а кран поднимает секцию дорожной рамки.",
+  },
+  en: {
+    title: "Scheduled maintenance",
+    status: "The website is temporarily unavailable.",
+    detail: "Please try again later.",
+    reload: "Reload page",
+    scene: "Barriers close the road while a crane lifts part of the gantry.",
+  },
+}[locale];
+---
+
+<SiteLayout
+  page="maintenance"
+  locale={locale}
+  title={copy.title}
+  headerLinks={{ russian: `${import.meta.env.BASE_URL}maintenance/`, english: `${import.meta.env.BASE_URL}en/maintenance/` }}
+>
+  <section class="maintenance" aria-labelledby="maintenance-title">
+    <div class="message">
+      <h1 id="maintenance-title">{copy.title}</h1>
+      <p>{copy.status}<br class="desktop-break" />{" "}{copy.detail}</p>
+      <a class="reload" href={Astro.url.pathname}>
+        <img src={reloadIcon} alt="" width="20" height="20" />
+        {copy.reload}
+      </a>
+    </div>
+
+    <div class="illustration">
+      <img
+        class="scene"
+        src={roadworkScene.src}
+        width={roadworkScene.width}
+        height={roadworkScene.height}
+        alt={copy.scene}
+      />
+      <span class="crane-cable" aria-hidden="true"></span>
+      <img
+        class="crane-load"
+        src={craneLoad.src}
+        width={craneLoad.width}
+        height={craneLoad.height}
+        alt=""
+      />
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .maintenance {
+    display: grid;
+    gap: 24px;
+    width: min(calc(100% - var(--rdt-gutter) * 2), var(--container-rdt-content));
+    margin-inline: auto;
+    padding-block: 28px 32px;
+    color: var(--color-rdt-status-ink);
+    font-family: var(--font-rdt);
+  }
+
+  .message::before {
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin-block-end: 16px;
+    border-radius: 2px;
+    background-color: #e69a36;
+    content: "";
+  }
+
+  h1 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  p {
+    max-width: 340px;
+    margin-block-start: 16px;
+    color: var(--color-rdt-status-muted);
+    font-size: var(--text-rdt-body);
+    line-height: var(--text-rdt-body--line-height);
+  }
+
+  .desktop-break {
+    display: none;
+  }
+
+  .reload {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    margin-block-start: 32px;
+    padding-inline: 20px;
+    border-radius: var(--radius-rdt-control);
+    background-color: var(--color-rdt-status-action);
+    color: var(--color-rdt-white);
+    cursor: pointer;
+    font-size: var(--text-rdt-body);
+    font-weight: 500;
+    line-height: var(--text-rdt-body--line-height);
+    transition: background-color 160ms ease;
+  }
+
+  .reload:hover {
+    background-color: color-mix(in srgb, var(--color-rdt-status-action) 85%, var(--color-rdt-status-ink));
+  }
+
+  .reload:focus-visible {
+    outline: 2px solid var(--color-rdt-status-action);
+    outline-offset: 4px;
+  }
+
+  .illustration {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 680px;
+    aspect-ratio: 1440 / 1140;
+    border-radius: var(--radius-rdt-card-compact);
+    background-color: var(--color-rdt-surface);
+  }
+
+  .illustration::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid #dce9f4;
+    border-radius: inherit;
+    pointer-events: none;
+    content: "";
+  }
+
+  .scene,
+  .crane-load {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .crane-load {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .crane-cable {
+    position: absolute;
+    /* Anchor and rest length relative to the original 1440 × 1140 artwork. */
+    top: 39.546%;
+    left: 35.489%;
+    width: max(1px, 0.18%);
+    height: 6.959%;
+    translate: -50% 0;
+    transform-origin: center top;
+    background-color: #263b50;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .crane-load {
+      animation: crane-lift 7s ease-in-out infinite;
+    }
+
+    .crane-cable {
+      animation: crane-cable 7s ease-in-out infinite;
+    }
+  }
+
+  @keyframes crane-lift {
+    0%, 12%, 100% { transform: translateY(0); }
+    50%, 62% { transform: translateY(-3.2%); }
+  }
+
+  @keyframes crane-cable {
+    0%, 12%, 100% { transform: scaleY(1); }
+    50%, 62% { transform: scaleY(0.54); }
+  }
+
+  @media (min-width: 768px) {
+    .maintenance {
+      gap: 32px;
+      padding-block: 32px 40px;
+    }
+
+    .message::before {
+      width: 48px;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 52px;
+    }
+
+    p {
+      max-width: 380px;
+    }
+
+    .illustration {
+      border-radius: var(--radius-rdt-card);
+    }
+  }
+
+  @media (min-width: 1120px) {
+    .maintenance {
+      grid-template-columns: minmax(0, 520fr) minmax(0, 776fr);
+      align-items: center;
+      gap: clamp(32px, 4.45vw, 64px);
+      padding-block: 48px 56px;
+    }
+
+    .message {
+      margin-block-end: 40px;
+    }
+
+    h1 {
+      max-width: 432px;
+      font-size: var(--text-rdt-title);
+      line-height: var(--text-rdt-title--line-height);
+    }
+
+    p {
+      max-width: 352px;
+    }
+
+    .desktop-break {
+      display: initial;
+    }
+
+    .reload {
+      font-size: var(--text-rdt-action);
+      font-weight: 600;
+      line-height: var(--text-rdt-action--line-height);
+    }
+
+    .illustration {
+      max-width: none;
+    }
+  }
+</style>

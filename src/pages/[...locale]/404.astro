@@ -1,0 +1,191 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import roadScene from "../../assets/pages/404/truck-gantry-scene.webp";
+import hazardLights from "../../assets/pages/404/truck-hazard-lights.webp";
+import backArrow from "../../assets/pages/404/back-arrow.svg?url";
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined } },
+    { params: { locale: "en" } },
+  ];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "ru";
+const copy = {
+  ru: {
+    title: "Страница",
+    titleEnd: "не найдена",
+    description: "Проверьте адрес или вернитесь на",
+    descriptionEnd: "главную.",
+    home: "На главную",
+    homeHref: import.meta.env.BASE_URL,
+    scene: "Синий самосвал зацепил дорожную рамку поднятым кузовом.",
+  },
+  en: {
+    title: "Page",
+    titleEnd: "not found",
+    description: "Check the address or return to the",
+    descriptionEnd: "home page.",
+    home: "Back to home",
+    homeHref: `${import.meta.env.BASE_URL}en/`,
+    scene: "A blue dump truck caught its raised bed on a roadway gantry.",
+  },
+}[locale];
+---
+
+<SiteLayout
+  page="404"
+  locale={locale}
+  title={`${copy.title} ${copy.titleEnd}`}
+  headerLinks={{ russian: `${import.meta.env.BASE_URL}404.html`, english: `${import.meta.env.BASE_URL}en/404/` }}
+>
+  <section class="not-found font-rdt text-rdt-status-ink" aria-labelledby="not-found-title">
+    <div class="message">
+      <p class="text-rdt-display font-extrabold text-rdt-status-action">404</p>
+      <h1 id="not-found-title" class="mt-4 font-bold">
+        {copy.title}<br class="title-break" />{" "}{copy.titleEnd}
+      </h1>
+      <p class="description mt-4 text-rdt-body text-rdt-status-muted">
+        {copy.description}<br class="description-break" />{" "}{copy.descriptionEnd}
+      </p>
+      <a
+        class="home-link mt-8 inline-flex min-h-12 cursor-pointer items-center gap-3 rounded-rdt-control bg-rdt-status-action px-5 text-rdt-body font-medium text-rdt-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rdt-status-action"
+        href={copy.homeHref}
+      >
+        <img src={backArrow} width="20" height="20" alt="" />
+        {copy.home}
+      </a>
+    </div>
+
+    <div class="illustration relative overflow-hidden rounded-rdt-card-compact bg-rdt-surface md:rounded-rdt-card">
+      <img
+        class="block w-full"
+        src={roadScene.src}
+        width={roadScene.width}
+        height={roadScene.height}
+        alt={copy.scene}
+      />
+      <img
+        class="hazard-lights pointer-events-none absolute inset-0 block w-full"
+        src={hazardLights.src}
+        width={hazardLights.width}
+        height={hazardLights.height}
+        alt=""
+      />
+    </div>
+  </section>
+</SiteLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    gap: 24px;
+    width: min(calc(100% - var(--rdt-gutter) * 2), var(--container-rdt-content));
+    margin-inline: auto;
+    padding-block: 28px 32px;
+  }
+
+  h1 {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .description {
+    max-width: 340px;
+  }
+
+  .description-break {
+    display: none;
+  }
+
+  .home-link:hover {
+    background-color: color-mix(in srgb, var(--color-rdt-status-action) 85%, var(--color-rdt-status-ink));
+  }
+
+  .illustration {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .illustration::after {
+    position: absolute;
+    inset: 0;
+    border: 1px solid #dce9f4;
+    border-radius: inherit;
+    pointer-events: none;
+    content: "";
+  }
+
+  .hazard-lights {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hazard-lights {
+      animation: hazard-blink 1.65s steps(1, end) infinite;
+    }
+  }
+
+  @keyframes hazard-blink {
+    0% { opacity: 1; }
+    38%, 100% { opacity: 0; }
+  }
+
+  @media (min-width: 768px) {
+    .not-found {
+      gap: 32px;
+      padding-block: 32px 40px;
+    }
+
+    h1 {
+      font-size: 48px;
+      line-height: 52px;
+    }
+
+    .title-break {
+      display: none;
+    }
+
+    .description {
+      max-width: 380px;
+    }
+  }
+
+  @media (min-width: 1120px) {
+    .not-found {
+      grid-template-columns: minmax(0, 520fr) minmax(0, 776fr);
+      align-items: center;
+      gap: clamp(32px, 4.45vw, 64px);
+      padding-block: 48px 56px;
+    }
+
+    .message {
+      margin-block-end: 40px;
+    }
+
+    h1 {
+      font-size: var(--text-rdt-title);
+      line-height: var(--text-rdt-title--line-height);
+    }
+
+    .description {
+      max-width: 352px;
+    }
+
+    .title-break,
+    .description-break {
+      display: initial;
+    }
+
+    .home-link {
+      font-size: var(--text-rdt-action);
+      font-weight: 600;
+      line-height: var(--text-rdt-action--line-height);
+    }
+
+    .illustration {
+      max-width: none;
+    }
+  }
+</style>

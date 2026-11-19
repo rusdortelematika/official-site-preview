@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "description": "Тестовые данные для разработки. Цены участков в рублях. Итог = сумма участков × коэффициент категории × коэффициент дня × (1 − скидка / 100), округление до копейки.",
+  "currency": "RUB",
+  "road": {
+    "ru": "ЮЛА",
+    "en": "YULA"
+  },
+  "defaults": {
+    "category": "car",
+    "from": "solntsevo",
+    "to": "zheleznodorozhny",
+    "day": "friday",
+    "payment": "rad",
+    "period": "midnight"
+  },
+  "categories": [
+    {
+      "id": "car",
+      "label": {
+        "ru": "Легковой",
+        "en": "Car"
+      },
+      "multiplier": 1
+    },
+    {
+      "id": "truck",
+      "label": {
+        "ru": "Грузовой",
+        "en": "Truck"
+      },
+      "multiplier": 2
+    },
+    {
+      "id": "bus",
+      "label": {
+        "ru": "Автобус",
+        "en": "Bus"
+      },
+      "multiplier": 1.6
+    },
+    {
+      "id": "other",
+      "label": {
+        "ru": "Другие категории",
+        "en": "Other categories"
+      },
+      "multiplier": 2.5
+    }
+  ],
+  "stops": [
+    {
+      "id": "solntsevo",
+      "label": {
+        "ru": "Солнцево",
+        "en": "Solntsevo"
+      }
+    },
+    {
+      "id": "butovo",
+      "label": {
+        "ru": "Бутово",
+        "en": "Butovo"
+      }
+    },
+    {
+      "id": "vidnoye",
+      "label": {
+        "ru": "Видное",
+        "en": "Vidnoye"
+      }
+    },
+    {
+      "id": "lytkarino",
+      "label": {
+        "ru": "Лыткарино",
+        "en": "Lytkarino"
+      }
+    },
+    {
+      "id": "tomilino",
+      "label": {
+        "ru": "Томилино",
+        "en": "Tomilino"
+      }
+    },
+    {
+      "id": "kraskovo",
+      "label": {
+        "ru": "Красково",
+        "en": "Kraskovo"
+      }
+    },
+    {
+      "id": "zheleznodorozhny",
+      "label": {
+        "ru": "Железнодорожный",
+        "en": "Zheleznodorozhny"
+      }
+    }
+  ],
+  "days": [
+    {
+      "id": "monday",
+      "label": {
+        "ru": "Понедельник",
+        "en": "Monday"
+      },
+      "multiplier": 0.95
+    },
+    {
+      "id": "tuesday",
+      "label": {
+        "ru": "Вторник",
+        "en": "Tuesday"
+      },
+      "multiplier": 0.95
+    },
+    {
+      "id": "wednesday",
+      "label": {
+        "ru": "Среда",
+        "en": "Wednesday"
+      },
+      "multiplier": 0.95
+    },
+    {
+      "id": "thursday",
+      "label": {
+        "ru": "Четверг",
+        "en": "Thursday"
+      },
+      "multiplier": 0.95
+    },
+    {
+      "id": "friday",
+      "label": {
+        "ru": "Пятница",
+        "en": "Friday"
+      },
+      "multiplier": 1
+    },
+    {
+      "id": "saturday",
+      "label": {
+        "ru": "Суббота",
+        "en": "Saturday"
+      },
+      "multiplier": 0.85
+    },
+    {
+      "id": "sunday",
+      "label": {
+        "ru": "Воскресенье",
+        "en": "Sunday"
+      },
+      "multiplier": 0.85
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": "rad",
+      "label": {
+        "ru": "С транспондером РАД",
+        "en": "RAD transponder"
+      },
+      "discountPercent": 30
+    },
+    {
+      "id": "card",
+      "label": {
+        "ru": "Банковской картой",
+        "en": "Bank card"
+      },
+      "discountPercent": 0
+    },
+    {
+      "id": "transponder",
+      "label": {
+        "ru": "Другой транспондер",
+        "en": "Other transponder"
+      },
+      "discountPercent": 10
+    }
+  ],
+  "periods": [
+    {
+      "id": "midnight",
+      "start": "00:00",
+      "end": "01:00"
+    },
+    {
+      "id": "night",
+      "start": "01:00",
+      "end": "06:00"
+    },
+    {
+      "id": "morning",
+      "start": "06:00",
+      "end": "14:00"
+    },
+    {
+      "id": "day",
+      "start": "14:00",
+      "end": "22:00"
+    },
+    {
+      "id": "evening",
+      "start": "22:00",
+      "end": "24:00"
+    }
+  ],
+  "segments": [
+    {
+      "from": "solntsevo",
+      "to": "butovo",
+      "prices": {
+        "midnight": 120,
+        "night": 120,
+        "morning": 250,
+        "day": 250,
+        "evening": 250
+      }
+    },
+    {
+      "from": "butovo",
+      "to": "vidnoye",
+      "prices": {
+        "midnight": 150,
+        "night": 150,
+        "morning": 300,
+        "day": 300,
+        "evening": 300
+      }
+    },
+    {
+      "from": "vidnoye",
+      "to": "lytkarino",
+      "prices": {
+        "midnight": 160,
+        "night": 160,
+        "morning": 300,
+        "day": 300,
+        "evening": 300
+      }
+    },
+    {
+      "from": "lytkarino",
+      "to": "tomilino",
+      "prices": {
+        "midnight": 180,
+        "night": 180,
+        "morning": 350,
+        "day": 350,
+        "evening": 350
+      }
+    },
+    {
+      "from": "tomilino",
+      "to": "kraskovo",
+      "prices": {
+        "midnight": 170,
+        "night": 170,
+        "morning": 300,
+        "day": 300,
+        "evening": 300
+      }
+    },
+    {
+      "from": "kraskovo",
+      "to": "zheleznodorozhny",
+      "prices": {
+        "midnight": 170,
+        "night": 170,
+        "morning": 350,
+        "day": 350,
+        "evening": 350
+      }
+    }
+  ]
+}

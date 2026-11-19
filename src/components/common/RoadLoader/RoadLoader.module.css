@@ -1,0 +1,80 @@
+.loader {
+  position: relative;
+  display: grid;
+  inline-size: min(100%, var(--road-loader-size));
+  justify-items: center;
+  font-family: var(--font-rdt);
+}
+
+.stage {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 1;
+}
+
+.stage canvas {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.logo {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  translate: -50% -50%;
+  /* The visible mark occupies 45.312px of its 48px viewBox. */
+  inline-size: calc(var(--road-loader-logo-width) / 0.944);
+  block-size: auto;
+  pointer-events: none;
+}
+
+.status {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-inline-size: 126px;
+  min-block-size: 44px;
+  padding-inline: 14px;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: var(--radius-rdt-control);
+  background-color: var(--color-rdt-white);
+  color: var(--color-rdt-primary);
+  font-size: var(--text-rdt-small);
+  font-weight: 600;
+  line-height: var(--text-rdt-small--line-height);
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--color-rdt-surface);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-rdt-action);
+  outline-offset: 3px;
+}
+
+.buttonIcon {
+  inline-size: 9px;
+  block-size: 10px;
+  border-inline: 2px solid currentColor;
+}
+
+.button[data-paused] .buttonIcon {
+  inline-size: 0;
+  block-size: 0;
+  border: 0;
+  border-block: 5px solid transparent;
+  border-inline-start: 8px solid currentColor;
+}

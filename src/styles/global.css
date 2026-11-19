@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Golos Text";
+  src: url("../assets/fonts/GolosText-Variable.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+}
+
+@theme static {
+  --font-rdt: "Golos Text", system-ui, sans-serif;
+
+  --color-rdt-white: #ffffff;
+  --color-rdt-ink: #1d2d4d;
+  --color-rdt-muted: #52617a;
+  --color-rdt-primary: #245daa;
+  --color-rdt-action: #2868d9;
+  --color-rdt-payment: #b23850;
+  --color-rdt-surface: #eef3fc;
+  --color-rdt-border: #dce9fa;
+  --color-rdt-discount: #dff9ef;
+
+  --color-rdt-status-ink: #0f1f31;
+  --color-rdt-status-muted: #435c71;
+  --color-rdt-status-action: #086ca6;
+
+  --text-rdt-small: 14px;
+  --text-rdt-small--line-height: 20px;
+  --text-rdt-body: 16px;
+  --text-rdt-body--line-height: 24px;
+  --text-rdt-action: 14px;
+  --text-rdt-action--line-height: 20px;
+  --text-rdt-value: 24px;
+  --text-rdt-value--line-height: 32px;
+  --text-rdt-card: 20px;
+  --text-rdt-card--line-height: 24px;
+  --text-rdt-metric: 22px;
+  --text-rdt-metric--line-height: 26px;
+  --text-rdt-title: 32px;
+  --text-rdt-title--line-height: 40px;
+  --text-rdt-display: 56px;
+  --text-rdt-display--line-height: 64px;
+
+  --radius-rdt-small: 8px;
+  --radius-rdt-control: 12px;
+  --radius-rdt-panel: 16px;
+  --radius-rdt-card-compact: 20px;
+  --radius-rdt-card: 24px;
+  --container-rdt-content: 1360px;
+}
+
+:root {
+  --rdt-gutter: 20px;
+  --rdt-payment-height: 44px;
+  --rdt-field-height: 48px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --rdt-gutter: 32px;
+    --rdt-field-height: 52px;
+
+    --text-rdt-action: 16px;
+    --text-rdt-action--line-height: 24px;
+    --text-rdt-card: 21px;
+    --text-rdt-card--line-height: 25px;
+    --text-rdt-metric: 26px;
+    --text-rdt-metric--line-height: 30px;
+    --text-rdt-title: 40px;
+    --text-rdt-title--line-height: 48px;
+    --text-rdt-display: 64px;
+    --text-rdt-display--line-height: 72px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --rdt-gutter: 40px;
+    --rdt-payment-height: 48px;
+    --rdt-field-height: 56px;
+
+    --text-rdt-action: 20px;
+    --text-rdt-card: 28px;
+    --text-rdt-card--line-height: 32px;
+    --text-rdt-metric: 32px;
+    --text-rdt-metric--line-height: 40px;
+    --text-rdt-title: 60px;
+    --text-rdt-title--line-height: 64px;
+    --text-rdt-display: 80px;
+    --text-rdt-display--line-height: 88px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-block-start: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

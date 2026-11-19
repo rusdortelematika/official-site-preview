@@ -1,0 +1,173 @@
+.section {
+  width: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin-inline: auto;
+  color: var(--color-rdt-ink);
+  font-family: var(--font-rdt);
+  margin-block-start: 28px;
+}
+
+.heading {
+  margin-block-end: 14px;
+  font-size: var(--text-rdt-title);
+  font-weight: 700;
+  line-height: var(--text-rdt-title--line-height);
+  text-align: center;
+}
+
+.companyGrid {
+  display: grid;
+  gap: 12px;
+  --card-arrow-size: 40px;
+  --card-arrow-icon-scale: 0.44;
+  --card-radius: var(--radius-rdt-card-compact);
+
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: minmax(222px, auto);
+}
+
+.art {
+  position: absolute;
+  inset-block: var(--art-top, auto) var(--art-bottom, 14px);
+  inset-inline-end: var(--art-right, 14px);
+  display: block;
+  inline-size: var(--art-width);
+  aspect-ratio: var(--art-ratio, auto);
+}
+
+.art > img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.company {
+  --card-title-size: 34px;
+  --card-title-line-height: 40px;
+  --art-width: max(100%, min(135.09%, 510px));
+  --art-right: -15px;
+  --art-bottom: 7.51px;
+  --art-ratio: 792 / 327.24;
+}
+
+.roadScene {
+  rotate: -3deg;
+}
+
+.roadScene > img {
+  position: absolute;
+  block-size: auto;
+}
+
+.roadScene > .roadway {
+  inset-block-start: 33.128%;
+}
+
+.roadScene > .roadCar {
+  inset-inline-start: 53.422%;
+  inset-block-start: 69.94%;
+  inline-size: 13.942%;
+}
+
+.roadScene > .guardrail {
+  inset-inline-start: 37.135%;
+  inset-block-start: 64.265%;
+  inline-size: 62.865%;
+}
+
+.roadScene > .gantry {
+  inset-inline-start: 54.563%;
+  inset-block-start: 4.602%;
+  inline-size: 20.659%;
+}
+
+.documents {
+  --card-icon-size: 28px;
+  --card-label-gap: 12px;
+  --card-title-size: 23px;
+  --card-title-line-height: 27px;
+  --art-width: 44.57%;
+  --art-right: 10px;
+  --art-bottom: 7px;
+  --art-ratio: 281 / 271;
+}
+
+@media (min-width: 768px) {
+  .section {
+    --card-inset: 18px;
+    --card-top: 18px;
+    margin-block-start: 32px;
+  }
+
+  .heading {
+    margin-block-end: 18px;
+  }
+
+  .companyGrid {
+    gap: 16px;
+    --card-radius: var(--radius-rdt-card);
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(238px, auto);
+  }
+
+  .company {
+    --card-title-size: 40px;
+    --card-title-line-height: 48px;
+    --art-width: min(140.8%, 580px);
+    --art-right: -22.7px;
+    --art-bottom: 8.4px;
+  }
+
+  .documents {
+    --card-label-gap: 12px;
+    --card-title-size: 24px;
+    --card-title-line-height: 29px;
+    --art-width: 46.667%;
+    --art-right: 5px;
+    --art-bottom: 7px;
+  }
+}
+
+@media (min-width: 1120px) {
+  .section {
+    --card-inset: 32px;
+    --card-top: 28px;
+    --card-radius: var(--radius-rdt-card);
+    --card-arrow-bottom: 24px;
+  }
+
+  .heading {
+    margin-block-end: 16px;
+  }
+
+  .companyGrid {
+    gap: 24px;
+    --card-shadow: 0 8px 20px rgb(36 70 109 / 6%);
+    --card-arrow-size: 48px;
+    --card-arrow-border: 1.2px;
+
+    grid-template-columns: minmax(0, 792fr) minmax(0, 544fr);
+    grid-auto-rows: minmax(328px, auto);
+  }
+
+  .company {
+    --card-top: 41px;
+    --card-title-size: var(--text-rdt-title);
+    --card-title-line-height: var(--text-rdt-title--line-height);
+    --art-width: 100%;
+    --art-right: -23px;
+    --art-bottom: -10.74px;
+  }
+
+  .documents {
+    --card-top: 32px;
+    --card-icon-size: 39px;
+    --card-label-gap: 17px;
+    --card-title-size: var(--text-rdt-card);
+    --card-title-line-height: var(--text-rdt-card--line-height);
+    --card-outline-width: 1.3px;
+    --art-width: 51.655%;
+    --art-right: 5px;
+    --art-bottom: 20px;
+  }
+}

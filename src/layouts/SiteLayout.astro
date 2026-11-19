@@ -1,0 +1,53 @@
+---
+import { ClientRouter } from "astro:transitions";
+import PageLoader from "../components/common/PageLoader/PageLoader";
+import { Footer } from "../components/layout/Footer/Footer";
+import { Header, type HeaderLocale } from "../components/layout/Header/Header";
+import "../styles/global.css";
+
+interface Props {
+  page: "home" | "road" | "rdt" | "404" | "maintenance";
+  locale: HeaderLocale;
+  title: string;
+  headerLinks?: Parameters<typeof Header>[0]["links"];
+}
+
+const { page, locale, title, headerLinks } = Astro.props;
+const isHome = page === "home";
+const showFooter = page === "home" || page === "road" || page === "rdt";
+const isStatusPage = page === "404" || page === "maintenance";
+---
+
+<html lang={locale} transition:animate="none">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}logo.svg`} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter fallback="swap" />
+  </head>
+  <body id="top" class:list={["flex min-h-dvh flex-col", isHome && "home-page", isStatusPage && "bg-[#f9fbfe]"]}>
+    <Header locale={locale} links={headerLinks} responsive={isStatusPage || isHome} />
+    <main class="flex-1">
+      <slot />
+    </main>
+    {showFooter && <Footer locale={locale} />}
+    <PageLoader client:load transition:persist="site-page-loader" transition:persist-props />
+  </body>
+</html>
+
+<style>
+  @media (min-width: 1280px) {
+    .home-page {
+      position: relative;
+    }
+
+    .home-page > :global(header) {
+      position: absolute;
+      z-index: 2;
+      inset-block-start: 0;
+      inset-inline: 0;
+    }
+  }
+</style>

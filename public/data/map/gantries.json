@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "gantry-01",
+      "coordinates": [
+        37.6445352,
+        55.5351821
+      ],
+      "label": {
+        "ru": "Рамка 01",
+        "en": "Gantry 01"
+      },
+      "test": true
+    },
+    {
+      "id": "gantry-02",
+      "coordinates": [
+        37.7452361,
+        55.5356224
+      ],
+      "label": {
+        "ru": "Рамка 02",
+        "en": "Gantry 02"
+      },
+      "test": true
+    },
+    {
+      "id": "gantry-03",
+      "coordinates": [
+        37.8374751,
+        55.544354
+      ],
+      "label": {
+        "ru": "Рамка 03",
+        "en": "Gantry 03"
+      },
+      "test": true
+    },
+    {
+      "id": "gantry-04",
+      "coordinates": [
+        37.918198,
+        55.6064122
+      ],
+      "label": {
+        "ru": "Рамка 04",
+        "en": "Gantry 04"
+      },
+      "test": true
+    },
+    {
+      "id": "gantry-05",
+      "coordinates": [
+        37.9626809,
+        55.6763907
+      ],
+      "label": {
+        "ru": "Рамка 05",
+        "en": "Gantry 05"
+      },
+      "test": true
+    }
+  ]
+}
