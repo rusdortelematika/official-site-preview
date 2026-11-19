@@ -38,7 +38,7 @@
   --card-number-size: 47px;
   --card-number-line-height: 52px;
   --card-title-line-height: 24px;
-  --art-width: 61.14%;
+  --art-width: 68%;
   --art-right: 8px;
   --art-bottom: 5px;
 
@@ -190,7 +190,7 @@
     --card-number-line-height: 60px;
     --card-title-size: 25px;
     --card-title-line-height: 30px;
-    --art-width: 68.06%;
+    --art-width: 75%;
     --art-right: 10px;
     --art-bottom: 14px;
   }
@@ -270,7 +270,7 @@
     --card-number-line-height: var(--text-rdt-display--line-height);
     --card-title-size: var(--text-rdt-card);
     --card-title-line-height: var(--text-rdt-card--line-height);
-    --art-width: 61.98%;
+    --art-width: 69%;
     --art-right: 17px;
     --art-bottom: 5px;
   }

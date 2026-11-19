@@ -1,0 +1,61 @@
+.button {
+  position: fixed;
+  z-index: 20;
+  inset-inline-end: max(24px, env(safe-area-inset-right, 0px));
+  inset-block-end: max(24px, env(safe-area-inset-bottom, 0px));
+  display: grid;
+  place-items: center;
+  inline-size: 64px;
+  block-size: 64px;
+  padding: 0;
+  border: 2px solid var(--color-rdt-white);
+  border-radius: 50%;
+  background-color: var(--color-rdt-payment);
+  color: var(--color-rdt-white);
+  box-shadow: 0 4px 16px rgb(29 45 77 / 24%);
+  cursor: pointer;
+}
+
+.button img {
+  display: block;
+  inline-size: 36px;
+  block-size: 36px;
+}
+
+.button:hover {
+  background-color: color-mix(in srgb, var(--color-rdt-payment) 90%, var(--color-rdt-ink));
+  box-shadow: 0 6px 20px rgb(29 45 77 / 30%);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--color-rdt-payment);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .button {
+    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+  }
+
+  .button:active {
+    transform: scale(0.96);
+  }
+}
+
+@media (max-width: 767px) {
+  .button {
+    inset-inline-end: max(16px, env(safe-area-inset-right, 0px));
+    inset-block-end: max(16px, env(safe-area-inset-bottom, 0px));
+    inline-size: 56px;
+    block-size: 56px;
+  }
+
+  .button img {
+    inline-size: 32px;
+    block-size: 32px;
+  }
+}

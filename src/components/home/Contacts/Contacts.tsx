@@ -16,14 +16,14 @@ const copy = {
   ru: {
     heading: "Контакты",
     email: "Электронная почта",
-    assistance: "Аварийные комиссары",
+    assistance: "Номер телефона",
     social: "Социальные сети",
     vk: "ВКонтакте",
   },
   en: {
     heading: "Contacts",
     email: "Email",
-    assistance: "Roadside assistance",
+    assistance: "Phone number",
     social: "Social media",
     vk: "VKontakte",
   },
@@ -33,7 +33,7 @@ export function Contacts({ locale = "ru", socialLinks = {} }: ContactsProps) {
   const text = copy[locale];
   const contacts = [
     { label: text.email, value: "reception@rusdor-telematika.ru", href: "mailto:reception@rusdor-telematika.ru", icon: emailIcon },
-    { label: text.assistance, value: "*2323", href: "tel:*2323", icon: phoneIcon },
+    { label: text.assistance, value: "Скоро", href: "", icon: phoneIcon },
   ];
   const socials = [
     { label: "MAX", href: socialLinks.max, className: styles.maxLogo },

@@ -21,7 +21,7 @@ const navigation = [
   ],
   [
     { key: "trafficPolice", ru: "ГИБДД", en: "Traffic Police" },
-    { key: "rdt", ru: "РДТ", en: "RDT" },
+    { key: "mobileApp", ru: "Мобильное приложение", en: "Mobile App" },
     { key: "trafficManagement", ru: "АСУДД", en: "Traffic Management" },
   ],
 ] as const;

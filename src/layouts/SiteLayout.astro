@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { FeedbackButton } from "../components/common/FeedbackButton/FeedbackButton";
 import PageLoader from "../components/common/PageLoader/PageLoader";
 import { Footer } from "../components/layout/Footer/Footer";
 import { Header, type HeaderLocale } from "../components/layout/Header/Header";
@@ -33,6 +34,7 @@ const isStatusPage = page === "404" || page === "maintenance";
       <slot />
     </main>
     {showFooter && <Footer locale={locale} />}
+    <FeedbackButton locale={locale} />
     <PageLoader client:load transition:persist="site-page-loader" transition:persist-props />
   </body>
 </html>

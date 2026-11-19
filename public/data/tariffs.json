@@ -11,7 +11,7 @@
     "from": "solntsevo",
     "to": "zheleznodorozhny",
     "day": "friday",
-    "payment": "rad",
+    "payment": "card",
     "period": "midnight"
   },
   "categories": [
@@ -159,28 +159,20 @@
   ],
   "paymentMethods": [
     {
-      "id": "rad",
-      "label": {
-        "ru": "С транспондером РАД",
-        "en": "RAD transponder"
-      },
-      "discountPercent": 30
-    },
-    {
       "id": "card",
       "label": {
-        "ru": "Банковской картой",
+        "ru": "Банковская карта",
         "en": "Bank card"
       },
       "discountPercent": 0
     },
     {
-      "id": "transponder",
+      "id": "sbp",
       "label": {
-        "ru": "Другой транспондер",
-        "en": "Other transponder"
+        "ru": "СБП",
+        "en": "SBP"
       },
-      "discountPercent": 10
+      "discountPercent": 0
     }
   ],
   "periods": [

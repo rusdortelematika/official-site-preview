@@ -1,5 +1,5 @@
 import { FeatureCard } from "../../common/FeatureCard/FeatureCard";
-import phoneIcon from "../../../assets/icons/home/roadside-phone.svg?url";
+import newsIcon from "../../../assets/icons/home/news.svg?url";
 import carIcon from "../../../assets/icons/home/police-car.svg?url";
 import safetyIcon from "../../../assets/icons/home/security-shield.svg?url";
 import paymentIcon from "../../../assets/icons/home/payment-card.svg?url";
@@ -18,18 +18,18 @@ import styles from "./AboutRoad.module.css";
 const copy = {
   ru: {
     heading: "О дороге",
-    emergency: "Служба аварийных\nкомиссаров",
+    emergency: "Новости",
     police: "ГИБДД",
-    safety: "Транспортная\nбезопасность",
+    safety: "Свободный поток",
     payment: "Способы\nоплаты",
     tariffs: "Тарифы",
     traffic: "АСУДД",
   },
   en: {
     heading: "About the Road",
-    emergency: "Roadside assistance",
+    emergency: "News",
     police: "Traffic Police",
-    safety: "Transport\nsecurity",
+    safety: "Free Flow",
     payment: "Payment\nmethods",
     tariffs: "Tolls",
     traffic: "Traffic\nmanagement",
@@ -46,8 +46,7 @@ export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFo
         <FeatureCard
           className={styles.emergency}
           title={text.emergency}
-          number="*2323"
-          icon={phoneIcon}
+          icon={newsIcon}
           tone="burgundy"
           href={notFoundHref}
         >
