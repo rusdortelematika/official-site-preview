@@ -1,0 +1,29 @@
+---
+import RoadSideTrack from "../../components/common/RoadSideTrack/RoadSideTrack";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined } },
+    { params: { locale: "en" } },
+  ];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "ru";
+const titles = {
+  ru: "О компании — РусДор Телематика",
+  en: "About the Company — RusDor Telematika",
+};
+---
+
+<SiteLayout
+  page="rdt"
+  locale={locale}
+  title={titles[locale]}
+  headerLinks={{
+    russian: `${import.meta.env.BASE_URL}rdt/`,
+    english: `${import.meta.env.BASE_URL}en/rdt/`,
+  }}
+>
+  <RoadSideTrack client:load transition:persist="page-road-side-track" transition:persist-props />
+</SiteLayout>

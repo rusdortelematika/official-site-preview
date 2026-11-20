@@ -29,7 +29,7 @@ const isStatusPage = page === "404" || page === "maintenance";
     <ClientRouter fallback="swap" />
   </head>
   <body id="top" class:list={["flex min-h-dvh flex-col", isHome && "home-page", isStatusPage && "bg-[#f9fbfe]"]}>
-    <Header locale={locale} links={headerLinks} responsive={isStatusPage || isHome} />
+    <Header locale={locale} links={headerLinks} responsive={isStatusPage || showFooter} />
     <main class="flex-1">
       <slot />
     </main>

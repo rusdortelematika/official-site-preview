@@ -1,0 +1,104 @@
+.section {
+  --asudd-illustration-height: 232px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin: 0 auto 64px;
+  color: var(--color-rdt-ink);
+  font-family: var(--font-rdt);
+}
+
+.header { display: grid; gap: 8px; }
+
+.heading {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 52px;
+}
+
+.description {
+  max-inline-size: 895px;
+  margin: 0;
+  color: var(--color-rdt-muted);
+  font-size: 17px;
+  line-height: 26px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 56fr) minmax(0, 44fr);
+  gap: 24px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--color-rdt-surface);
+}
+
+.icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: 10px;
+  background: var(--color-rdt-border);
+}
+
+.featureText { flex: 1; min-inline-size: 0; }
+.featureTitle { margin: 0; font-size: 17px; font-weight: 600; line-height: 22px; }
+.featureDescription { margin: 2px 0 0; color: var(--color-rdt-muted); font-size: 15px; line-height: 20px; }
+
+.illustration {
+  display: grid;
+  place-items: center;
+  min-inline-size: 0;
+  min-block-size: var(--asudd-illustration-height);
+  overflow: hidden;
+  border-radius: var(--radius-rdt-card);
+  background: var(--color-rdt-ink);
+}
+
+.controlCenter {
+  display: block;
+  inline-size: calc(var(--asudd-illustration-height) * 1.25);
+  max-inline-size: calc(100% - 24px);
+  block-size: auto;
+  aspect-ratio: 1.28;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section { --asudd-illustration-height: 235px; gap: 16px; }
+  .heading { font-size: 38px; line-height: 46px; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+}
+
+@media (max-width: 767px) {
+  .section { --asudd-illustration-height: 212px; gap: 12px; margin-block-end: 40px; }
+  .heading { font-size: 30px; line-height: 36px; }
+  .description { font-size: 15px; line-height: 22px; }
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .feature { padding: 12px; }
+  .featureTitle { font-size: 16px; }
+  .featureDescription { font-size: 14px; }
+  .illustration { border-radius: var(--radius-rdt-card-compact); }
+}

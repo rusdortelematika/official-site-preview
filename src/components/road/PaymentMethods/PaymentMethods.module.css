@@ -1,0 +1,108 @@
+.section {
+  inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin: 32px auto 64px;
+  color: var(--color-rdt-ink);
+  font-family: var(--font-rdt);
+}
+
+.heading {
+  margin: 0 0 10px;
+  font-size: clamp(32px, 3.35vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -1.2px;
+}
+
+.description {
+  max-inline-size: 840px;
+  margin: 0 0 28px;
+  color: var(--color-rdt-muted);
+  font-size: var(--text-rdt-body);
+  line-height: 26px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.card {
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: var(--radius-rdt-card);
+  background: var(--color-rdt-surface);
+}
+
+.content {
+  position: relative;
+  min-block-size: 246px;
+  padding: 20px;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  margin-block-end: 10px;
+  border-radius: var(--radius-rdt-control);
+  background: var(--color-rdt-border);
+}
+
+.cardTitle {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+}
+
+.cardDescription {
+  position: relative;
+  z-index: 1;
+  max-inline-size: 375px;
+  margin: 0;
+  padding-inline-end: 24px;
+  color: var(--color-rdt-muted);
+  font-size: var(--text-rdt-body);
+  line-height: 24px;
+}
+
+.art {
+  position: absolute;
+  inset-inline-end: 16px;
+  inset-block-end: 12px;
+  inline-size: 26%;
+  max-block-size: 150px;
+  block-size: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .content { min-block-size: 290px; }
+  .cardTitle { font-size: 24px; line-height: 30px; }
+  .cardDescription { max-inline-size: 82%; padding-inline-end: 0; }
+  .art { inline-size: 22%; inset-inline-end: 8px; inset-block-end: 12px; }
+}
+
+@media (max-width: 767px) {
+  .section { margin-block: 24px 40px; }
+  .heading { letter-spacing: -0.6px; }
+  .description { margin-block-end: 20px; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .content { min-block-size: 258px; padding: 18px; }
+  .cardTitle { font-size: 24px; line-height: 30px; }
+  .cardDescription { max-inline-size: 86%; padding-inline-end: 20px; }
+  .art { inline-size: 23%; inset-inline-end: 8px; inset-block-end: 8px; }
+}
+
+.details {
+  display: grid;
+  gap: 16px;
+  margin-block-start: 16px;
+}

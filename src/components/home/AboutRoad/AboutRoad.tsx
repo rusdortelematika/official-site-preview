@@ -38,6 +38,8 @@ const copy = {
 
 export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFoundHref: string }) {
   const text = copy[locale];
+  const trafficPoliceHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/#gibdd`;
+  const trafficManagementHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/#asudd`;
 
   return (
     <section class={styles.section} id="about-road" aria-labelledby="about-road-title">
@@ -61,7 +63,7 @@ export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFo
           />
         </FeatureCard>
 
-        <FeatureCard className={styles.police} title={text.police} icon={carIcon} href={notFoundHref}>
+        <FeatureCard className={styles.police} title={text.police} icon={carIcon} href={trafficPoliceHref}>
           <span class={styles.art}>
             <img src={policeCar.src} width={policeCar.width} height={policeCar.height} alt="" loading="lazy" decoding="async" />
           </span>
@@ -88,7 +90,7 @@ export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFo
           </span>
         </FeatureCard>
 
-        <FeatureCard className={styles.traffic} title={text.traffic} icon={trafficIcon} tone="dark" href={notFoundHref}>
+        <FeatureCard className={styles.traffic} title={text.traffic} icon={trafficIcon} tone="dark" href={trafficManagementHref}>
           <span class={styles.art}>
             <img src={trafficCone.src} width={trafficCone.width} height={trafficCone.height} alt="" loading="lazy" decoding="async" />
           </span>

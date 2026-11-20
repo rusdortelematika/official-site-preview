@@ -1,0 +1,35 @@
+---
+import RoadSideTrack from "../../components/common/RoadSideTrack/RoadSideTrack";
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import PaymentMethods from "../../components/road/PaymentMethods/PaymentMethods";
+import TrafficPolice from "../../components/road/TrafficPolice/TrafficPolice";
+import TrafficManagement from "../../components/road/TrafficManagement/TrafficManagement";
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: undefined } },
+    { params: { locale: "en" } },
+  ];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "ru";
+const titles = {
+  ru: "О дороге — РусДор Телематика",
+  en: "About the Road — RusDor Telematika",
+};
+---
+
+<SiteLayout
+  page="road"
+  locale={locale}
+  title={titles[locale]}
+  headerLinks={{
+    russian: `${import.meta.env.BASE_URL}road/`,
+    english: `${import.meta.env.BASE_URL}en/road/`,
+  }}
+>
+  <RoadSideTrack client:load transition:persist="page-road-side-track" transition:persist-props />
+  <PaymentMethods client:visible locale={locale} />
+  <TrafficPolice locale={locale} />
+  <TrafficManagement locale={locale} />
+</SiteLayout>

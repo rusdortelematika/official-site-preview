@@ -1,0 +1,246 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin: 0 auto 64px;
+  color: var(--color-rdt-ink);
+  font-family: var(--font-rdt);
+}
+
+.heading {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 52px;
+}
+
+.directory {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.intro { display: grid; gap: 6px; }
+
+.directoryTitle {
+  margin: 0;
+  font-size: var(--text-rdt-card);
+  font-weight: 700;
+  line-height: 34px;
+}
+
+.description {
+  max-inline-size: 820px;
+  margin: 0;
+  color: var(--color-rdt-muted);
+  font-size: var(--text-rdt-body);
+  line-height: var(--text-rdt-body--line-height);
+}
+
+.tableShell {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-rdt-card-compact);
+  background: var(--color-rdt-white);
+}
+
+.tableShell::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: inherit;
+  pointer-events: none;
+  content: "";
+}
+
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: left;
+}
+
+.districtColumn { inline-size: 25.294%; }
+.departmentColumn { inline-size: 48.088%; }
+.contactColumn { inline-size: 26.618%; }
+
+.table thead {
+  background: var(--color-rdt-ink);
+  color: var(--color-rdt-white);
+}
+
+.table thead th {
+  padding-block: 16px;
+  font-size: var(--text-rdt-body);
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.table th, .table td {
+  padding-inline-end: 18px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.table tr > :first-child { padding-inline-start: 24px; padding-inline-end: 14px; }
+.table tr > :last-child { padding-inline-end: 24px; }
+.table tbody tr + tr { border-block-start: 1px solid var(--color-rdt-border); }
+.table tbody tr:nth-child(even) { background: var(--color-rdt-surface); }
+.table tbody th, .table tbody td { padding-block: 20px; }
+
+.district {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
+}
+
+.department, .contacts { display: flex; flex-direction: column; gap: 5px; }
+.departmentName { margin: 0; font-size: 17px; font-weight: 500; line-height: 25px; }
+.address { margin: 0; color: var(--color-rdt-muted); font-size: 15px; line-height: 22px; }
+.phone { font-size: 18px; font-weight: 600; line-height: 24px; white-space: nowrap; }
+.source { align-self: flex-start; font-size: 13px; font-weight: 500; line-height: 18px; white-space: nowrap; }
+.mobileTableTitle, .mobileDuty { display: none; }
+
+.section a {
+  inline-size: fit-content;
+  color: var(--color-rdt-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.section a:hover { color: var(--color-rdt-action); }
+.section a:focus-visible { outline: 3px solid var(--color-rdt-action); outline-offset: 4px; }
+
+.services {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 28%);
+  gap: 24px;
+}
+
+.authority {
+  position: relative;
+  min-inline-size: 0;
+  min-block-size: 256px;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: var(--radius-rdt-card);
+  background: var(--color-rdt-ink);
+  color: var(--color-rdt-white);
+}
+
+.authorityText { position: relative; z-index: 1; max-inline-size: 425px; }
+.authorityTitle { margin: 0 0 8px; font-size: 27px; font-weight: 700; line-height: 32px; }
+.authorityDescription { margin: 0; font-size: var(--text-rdt-body); line-height: 24px; }
+
+.section .divisions {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-block-size: 48px;
+  max-inline-size: 100%;
+  margin-block-start: 18px;
+  padding: 11px 12px;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: var(--radius-rdt-control);
+  background: var(--color-rdt-white);
+  font-size: var(--text-rdt-body);
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.divisions img { flex: none; }
+.section .divisions:hover { border-color: var(--color-rdt-primary); background: var(--color-rdt-border); color: var(--color-rdt-ink); }
+
+.patrolCar {
+  position: absolute;
+  inset-inline-end: 12px;
+  inset-block-end: 10px;
+  inline-size: min(340px, 43%);
+  block-size: auto;
+  pointer-events: none;
+}
+
+.emergency {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-inline-size: 0;
+  min-block-size: 256px;
+  padding: 23px;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: var(--radius-rdt-card);
+  background: var(--color-rdt-surface);
+}
+
+.emergencyIcon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border-radius: 10px;
+  background: var(--color-rdt-white);
+}
+
+.section .emergencyNumber { margin-block-start: 12px; font-size: 48px; font-weight: 800; line-height: 56px; }
+.emergencyTitle { margin: 8px 0 0; font-size: 18px; font-weight: 500; line-height: 24px; }
+.emergencyDescription { margin: 8px 0 0; color: var(--color-rdt-muted); font-size: 15px; line-height: 20px; }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section { gap: 16px; }
+  .heading { font-size: 40px; line-height: 46px; }
+  .directoryTitle { font-size: 28px; }
+  .table tr > :first-child { padding-inline-start: 16px; }
+  .table tr > :last-child { padding-inline-end: 16px; }
+  .table thead th { font-size: 14px; line-height: 20px; }
+  .district { font-size: 16px; line-height: 22px; }
+  .departmentName { font-size: 15px; line-height: 21px; }
+  .address { font-size: 14px; line-height: 20px; }
+  .phone { font-size: 16px; line-height: 22px; }
+  .emergency { padding: 19px; }
+  .emergencyTitle { font-size: 16px; }
+  .emergencyDescription { font-size: 14px; }
+}
+
+@media (max-width: 767px) {
+  .section { gap: 12px; margin-block-end: 40px; }
+  .heading { font-size: 30px; line-height: 36px; }
+  .directory { gap: 12px; }
+  .directoryTitle { font-size: 22px; line-height: 28px; }
+  .description { font-size: 14px; line-height: 20px; }
+  .tableShell { border-radius: var(--radius-rdt-panel); }
+  .mobileTableTitle { display: block; margin: 0; padding: 14px 16px; background: var(--color-rdt-ink); color: var(--color-rdt-white); font-size: 16px; font-weight: 600; line-height: 22px; }
+  .table, .table tbody { display: block; }
+  .table colgroup { display: none; }
+  .table thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .table tbody tr { display: grid; gap: 8px; padding: 16px; }
+  .table tbody tr > th, .table tbody tr > td { display: block; padding: 0; }
+  .table tbody tr > :first-child, .table tbody tr > :last-child { padding-inline: 0; }
+  .district { font-size: 18px; line-height: 24px; }
+  .department { gap: 4px; }
+  .departmentName { font-size: 15px; line-height: 21px; }
+  .address { font-size: 14px; line-height: 20px; }
+  .contacts { flex-direction: row; align-items: flex-end; justify-content: space-between; gap: 8px; }
+  .phoneGroup { display: flex; flex-direction: column; gap: 2px; }
+  .mobileDuty { display: block; color: var(--color-rdt-muted); font-size: 13px; line-height: 18px; }
+  .phone { font-size: 17px; line-height: 23px; }
+  .source { align-self: flex-end; }
+  .services { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .authority { min-block-size: 302px; padding: 16px; border-radius: var(--radius-rdt-card-compact); }
+  .authorityTitle { font-size: 22px; line-height: 28px; }
+  .authorityDescription { font-size: 15px; line-height: 22px; }
+  .section .divisions { min-block-size: 44px; font-size: 14px; line-height: 20px; }
+  .patrolCar { inset-inline-end: 9px; inline-size: 195px; }
+  .emergency { display: grid; grid-template-columns: 40px minmax(0, 1fr); align-content: start; column-gap: 10px; min-block-size: 158px; padding: 15px; border-radius: var(--radius-rdt-card-compact); }
+  .section .emergencyNumber { align-self: center; margin: 0; font-size: 36px; line-height: 44px; }
+  .emergencyTitle { grid-column: 1 / -1; margin-block-start: 10px; font-size: 16px; }
+  .emergencyDescription { grid-column: 1 / -1; font-size: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section a { transition: none; }
+}
