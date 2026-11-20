@@ -40,6 +40,8 @@ export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFo
   const text = copy[locale];
   const trafficPoliceHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/#gibdd`;
   const trafficManagementHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/#asudd`;
+  const paymentMethodsHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/#payment-methods`;
+  const tariffsHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/#vehicle-classes`;
 
   return (
     <section class={styles.section} id="about-road" aria-labelledby="about-road-title">
@@ -75,14 +77,14 @@ export function AboutRoad({ locale, notFoundHref }: { locale: "ru" | "en"; notFo
           </span>
         </FeatureCard>
 
-        <FeatureCard className={styles.payment} title={text.payment} icon={paymentIcon} href={notFoundHref}>
+        <FeatureCard className={styles.payment} title={text.payment} icon={paymentIcon} href={paymentMethodsHref}>
           <span class={styles.art}>
             <span class={styles.cardBacking} />
             <img src={bankCard.src} width={bankCard.width} height={bankCard.height} alt="" loading="lazy" decoding="async" />
           </span>
         </FeatureCard>
 
-        <FeatureCard className={styles.tariffs} title={text.tariffs} icon={tariffsIcon} href={notFoundHref}>
+        <FeatureCard className={styles.tariffs} title={text.tariffs} icon={tariffsIcon} href={tariffsHref}>
           <span class={styles.art}>
             <img src={tollReceipt.src} width={tollReceipt.width} height={tollReceipt.height} alt="" loading="lazy" decoding="async" />
             <img class={styles.coinLeft} src={leftCoin} width="56" height="51" alt="" />
