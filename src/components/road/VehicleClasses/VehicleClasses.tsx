@@ -5,25 +5,19 @@ type Locale = "ru" | "en";
 const copy = {
   ru: {
     heading: "Классы транспортных средств",
-    description: "Максимальная плата за проезд по всему Объекту Соглашения (элементы 1, 2 и 3).",
-    classLabel: "Класс",
-    group: "(группа)",
+    classLabel: "Класс ТС",
     vehicleDescription: "Описание класса транспортного средства",
     maximumFee: "Максимальная плата",
     perTrip: "за проезд",
     vat: "включая НДС",
-    indexation: "Плата подлежит индексации в соответствии с п. 2.5.",
   },
   en: {
     heading: "Vehicle classes",
-    description: "Maximum toll for the entire road covered by the Agreement (sections 1, 2 and 3).",
-    classLabel: "Class",
-    group: "(group)",
+    classLabel: "Vehicle class",
     vehicleDescription: "Vehicle class description",
     maximumFee: "Maximum toll",
     perTrip: "per journey",
     vat: "including VAT",
-    indexation: "The toll is subject to indexation in accordance with clause 2.5.",
   },
 };
 
@@ -56,13 +50,10 @@ export default function VehicleClasses({ locale = "ru" }: { locale?: Locale }) {
 
   return (
     <section class={styles.section} id="vehicle-classes" aria-labelledby="vehicle-classes-title">
-      <div class={styles.intro}>
-        <h2 class={styles.heading} id="vehicle-classes-title">{text.heading}</h2>
-        <p class={styles.description} id="vehicle-classes-description">{text.description}</p>
-      </div>
+      <h2 class={styles.heading} id="vehicle-classes-title">{text.heading}</h2>
 
       <div class={styles.tableShell}>
-        <table class={styles.table} aria-labelledby="vehicle-classes-title" aria-describedby="vehicle-classes-description vehicle-classes-indexation">
+        <table class={styles.table} aria-labelledby="vehicle-classes-title">
           <colgroup>
             <col class={styles.classColumn} />
             <col class={styles.descriptionColumn} />
@@ -70,7 +61,7 @@ export default function VehicleClasses({ locale = "ru" }: { locale?: Locale }) {
           </colgroup>
           <thead>
             <tr>
-              <th scope="col">{text.classLabel}<br />{text.group}</th>
+              <th scope="col">{text.classLabel}</th>
               <th scope="col">{text.vehicleDescription}</th>
               <th scope="col">{text.maximumFee}<br />{text.perTrip}</th>
             </tr>
@@ -93,8 +84,6 @@ export default function VehicleClasses({ locale = "ru" }: { locale?: Locale }) {
           </tbody>
         </table>
       </div>
-
-      <p class={styles.note} id="vehicle-classes-indexation">{text.indexation}</p>
     </section>
   );
 }

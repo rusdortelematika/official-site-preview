@@ -8,9 +8,7 @@
   font-family: var(--font-rdt);
 }
 
-.intro { display: flex; flex-direction: column; gap: 8px; }
 .heading { margin: 0; font-size: 28px; font-weight: 700; line-height: 34px; }
-.description { margin: 0; color: var(--color-rdt-muted); font-size: var(--text-rdt-body); line-height: var(--text-rdt-body--line-height); }
 
 .tableShell {
   position: relative;
@@ -59,7 +57,6 @@
 .fee { display: flex; flex-direction: column; gap: 2px; }
 .amount { color: var(--color-rdt-primary); font-size: var(--text-rdt-value); font-weight: 700; line-height: var(--text-rdt-value--line-height); white-space: nowrap; }
 .vat { color: var(--color-rdt-muted); font-size: 13px; line-height: 18px; }
-.note { margin: 0; color: var(--color-rdt-muted); font-size: var(--text-rdt-small); line-height: var(--text-rdt-small--line-height); }
 
 @media (max-width: 767px) {
   .heading { font-size: 24px; line-height: 30px; }
