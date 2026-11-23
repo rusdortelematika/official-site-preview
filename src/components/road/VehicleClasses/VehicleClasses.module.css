@@ -3,12 +3,14 @@
   flex-direction: column;
   gap: 16px;
   min-inline-size: 0;
+  inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
+  margin: 0 auto 16px;
   padding-block-start: 8px;
   color: var(--color-rdt-ink);
   font-family: var(--font-rdt);
 }
 
-.heading { margin: 0; font-size: 28px; font-weight: 700; line-height: 34px; }
+.heading { margin: 0; font-size: 44px; font-weight: 700; line-height: 34px; }
 
 .tableShell {
   position: relative;
@@ -58,8 +60,12 @@
 .amount { color: var(--color-rdt-primary); font-size: var(--text-rdt-value); font-weight: 700; line-height: var(--text-rdt-value--line-height); white-space: nowrap; }
 .vat { color: var(--color-rdt-muted); font-size: 13px; line-height: 18px; }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heading { font-size: 40px; line-height: 46px; }
+}
+
 @media (max-width: 767px) {
-  .heading { font-size: 24px; line-height: 30px; }
+  .heading { font-size: 30px; line-height: 36px; }
   .table, .table tbody { display: block; }
   .table colgroup { display: none; }
   .table thead { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

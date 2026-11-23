@@ -3,8 +3,6 @@ import plateIcon from "../../../assets/pages/road/payment-methods/number-plate.s
 import transponder from "../../../assets/pages/road/payment-methods/transponder.webp";
 import bankCard from "../../../assets/pages/home/road/bank-card.png";
 import PaymentVideo from "../PaymentVideo/PaymentVideo";
-import VehicleClasses from "../VehicleClasses/VehicleClasses";
-import TollFines from "../TollFines/TollFines";
 import styles from "./PaymentMethods.module.css";
 
 type Locale = "ru" | "en";
@@ -26,7 +24,7 @@ const copy = {
   },
   en: {
     heading: "Payment methods",
-    description: "YULA uses Free Flow tolling. Gantries record each passage while your vehicle keeps moving.",
+    description: "The road uses Free Flow tolling. Gantries record each passage while your vehicle keeps moving.",
     methods: {
       transponder: {
         title: "With a transponder",
@@ -53,18 +51,22 @@ export default function PaymentMethods({ locale = "ru" }: Props) {
 
   return (
     <section class={styles.section} id="payment-methods" aria-labelledby="payment-methods-title">
-      <h1 class={styles.heading} id="payment-methods-title">{text.heading}</h1>
-      <p class={styles.description}>{text.description}</p>
+      <div class={styles.intro}>
+        <h1 class={styles.heading} id="payment-methods-title">{text.heading}</h1>
+        <p class={styles.description}>{text.description}</p>
+      </div>
 
       <div class={styles.grid}>
         {methods.map((method) => (
           <article class={styles.card} key={method.id}>
             <div class={styles.content}>
-              <span class={styles.icon}><img src={method.icon} width="24" height="24" alt="" /></span>
-              <h2 class={styles.cardTitle}>{text.methods[method.id].title}</h2>
+              <div class={styles.cardHeading}>
+                <span class={styles.icon}><img src={method.icon} width="24" height="24" alt="" /></span>
+                <h2 class={styles.cardTitle}>{text.methods[method.id].title}</h2>
+              </div>
               <p class={styles.cardDescription}>{text.methods[method.id].description}</p>
               <img
-                class={styles.art}
+                class={`${styles.art} ${method.id === "transponder" ? styles.transponderArt : styles.plateArt}`}
                 src={method.art.src}
                 width={method.art.width}
                 height={method.art.height}
@@ -76,11 +78,6 @@ export default function PaymentMethods({ locale = "ru" }: Props) {
             <PaymentVideo mode={method.id} locale={locale} />
           </article>
         ))}
-      </div>
-
-      <div class={styles.details}>
-        <VehicleClasses locale={locale} />
-        <TollFines locale={locale} />
       </div>
     </section>
   );

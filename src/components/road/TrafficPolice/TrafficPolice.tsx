@@ -8,8 +8,7 @@ type Locale = "ru" | "en";
 const copy = {
   ru: {
     heading: "ГИБДД",
-    directory: "Куда обращаться",
-    description: "Контакты территориальных подразделений в округах вдоль дороги.",
+    description: "Контакты территориальных подразделений в округах вдоль ЮЛА. Ответственного за конкретный участок уточняйте в Госавтоинспекции.",
     districts: "Округа вдоль ЮЛА",
     department: "Подразделение и адрес",
     duty: "Дежурная часть",
@@ -19,11 +18,9 @@ const copy = {
     authorityDescription: "Адреса и телефоны подразделений, режим работы и сервисы для водителей.",
     divisions: "Подразделения ГИБДД",
     emergency: "Единый номер экстренных служб",
-    emergencyDescription: "При ДТП или другой экстренной ситуации.",
   },
   en: {
     heading: "Traffic police",
-    directory: "Who to contact",
     description: "Local traffic police departments in the districts along YULA. Contact the traffic police to confirm which department covers a particular road section.",
     districts: "Districts along YULA",
     department: "Department and address",
@@ -34,7 +31,6 @@ const copy = {
     authorityDescription: "Department addresses, phone numbers, opening hours and services for drivers.",
     divisions: "Traffic police departments",
     emergency: "Emergency services number",
-    emergencyDescription: "For a road accident or another emergency.",
   },
 };
 
@@ -82,60 +78,56 @@ export default function TrafficPolice({ locale = "ru" }: { locale?: Locale }) {
 
   return (
     <section class={styles.section} id="gibdd" aria-labelledby="gibdd-title">
-      <h2 class={styles.heading} id="gibdd-title">{text.heading}</h2>
-
-      <div class={styles.directory}>
-        <div class={styles.intro}>
-          <h3 class={styles.directoryTitle} id="gibdd-directory-title">{text.directory}</h3>
-          <p class={styles.description}>{text.description}</p>
-        </div>
-        <div class={styles.tableShell}>
-          <p class={styles.mobileTableTitle} aria-hidden="true">{text.mobileDirectory}</p>
-          <table class={styles.table} aria-labelledby="gibdd-directory-title">
-            <colgroup>
-              <col class={styles.districtColumn} />
-              <col class={styles.departmentColumn} />
-              <col class={styles.contactColumn} />
-            </colgroup>
-            <thead>
-              <tr>
-                <th scope="col">{text.districts}</th>
-                <th scope="col">{text.department}</th>
-                <th scope="col">{text.duty}</th>
+      <div class={styles.intro}>
+        <h2 class={styles.heading} id="gibdd-title">{text.heading}</h2>
+        <p class={styles.description}>{text.description}</p>
+      </div>
+      <div class={styles.tableShell}>
+        <p class={styles.mobileTableTitle} aria-hidden="true">{text.mobileDirectory}</p>
+        <table class={styles.table} aria-labelledby="gibdd-title">
+          <colgroup>
+            <col class={styles.districtColumn} />
+            <col class={styles.departmentColumn} />
+            <col class={styles.contactColumn} />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">{text.districts}</th>
+              <th scope="col">{text.department}</th>
+              <th scope="col">{text.duty}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {departments.map((department) => (
+              <tr key={department.id}>
+                <th scope="row" class={styles.district}>{department.district[locale]}</th>
+                <td>
+                  <div class={styles.department}>
+                    <p class={styles.departmentName}>{department.name[locale]}</p>
+                    <p class={styles.address}>{department.address[locale]}</p>
+                  </div>
+                </td>
+                <td>
+                  <div class={styles.contacts}>
+                    <div class={styles.phoneGroup}>
+                      <span class={styles.mobileDuty}>{text.duty}</span>
+                      <a class={styles.phone} href={`tel:+${department.phone.replace(/\D/g, "")}`}>{department.phone}</a>
+                    </div>
+                    <a
+                      class={styles.source}
+                      href={department.source}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${text.source}: ${department.district[locale]}`}
+                    >
+                      {text.source} <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {departments.map((department) => (
-                <tr key={department.id}>
-                  <th scope="row" class={styles.district}>{department.district[locale]}</th>
-                  <td>
-                    <div class={styles.department}>
-                      <p class={styles.departmentName}>{department.name[locale]}</p>
-                      <p class={styles.address}>{department.address[locale]}</p>
-                    </div>
-                  </td>
-                  <td>
-                    <div class={styles.contacts}>
-                      <div class={styles.phoneGroup}>
-                        <span class={styles.mobileDuty}>{text.duty}</span>
-                        <a class={styles.phone} href={`tel:+${department.phone.replace(/\D/g, "")}`}>{department.phone}</a>
-                      </div>
-                      <a
-                        class={styles.source}
-                        href={department.source}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${text.source}: ${department.district[locale]}`}
-                      >
-                        {text.source} <span aria-hidden="true">↗</span>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div class={styles.services}>
@@ -157,10 +149,11 @@ export default function TrafficPolice({ locale = "ru" }: { locale?: Locale }) {
         </article>
 
         <article class={styles.emergency} aria-labelledby="gibdd-emergency-title">
-          <span class={styles.emergencyIcon} aria-hidden="true"><img src={phoneIcon} width="22" height="22" alt="" /></span>
-          <a class={styles.emergencyNumber} href="tel:112" aria-label={`${text.emergency}: 112`}>112</a>
+          <a class={styles.emergencyCall} href="tel:112" aria-label={`${text.emergency}: 112`}>
+            <img src={phoneIcon} width="56" height="56" alt="" />
+            <span class={styles.emergencyNumber}>112</span>
+          </a>
           <h3 class={styles.emergencyTitle} id="gibdd-emergency-title">{text.emergency}</h3>
-          <p class={styles.emergencyDescription}>{text.emergencyDescription}</p>
         </article>
       </div>
     </section>

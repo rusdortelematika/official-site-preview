@@ -1,33 +1,42 @@
 .section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
-  margin: 32px auto 64px;
+  margin: 40px auto 16px;
   color: var(--color-rdt-ink);
   font-family: var(--font-rdt);
 }
 
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .heading {
-  margin: 0 0 10px;
-  font-size: clamp(32px, 3.35vw, 48px);
+  margin: 0;
+  font-size: 44px;
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -1.2px;
+  line-height: 52px;
 }
 
 .description {
-  max-inline-size: 840px;
-  margin: 0 0 28px;
+  margin: 0;
   color: var(--color-rdt-muted);
-  font-size: var(--text-rdt-body);
+  font-size: 17px;
   line-height: 26px;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 26px;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   min-inline-size: 0;
   overflow: hidden;
   border: 1px solid var(--color-rdt-border);
@@ -37,72 +46,100 @@
 
 .content {
   position: relative;
-  min-block-size: 246px;
-  padding: 20px;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px;
+  gap: 14px 12px;
+  padding: 19px;
+}
+
+.cardHeading {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  gap: 12px;
+  min-inline-size: 0;
 }
 
 .icon {
   display: grid;
+  flex: none;
   place-items: center;
   inline-size: 40px;
   block-size: 40px;
-  margin-block-end: 10px;
   border-radius: var(--radius-rdt-control);
   background: var(--color-rdt-border);
 }
 
 .cardTitle {
-  position: relative;
-  z-index: 1;
-  margin: 0 0 10px;
-  font-size: 28px;
+  min-inline-size: 0;
+  margin: 0;
+  font-size: 24px;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 30px;
   letter-spacing: -0.5px;
 }
 
 .cardDescription {
-  position: relative;
-  z-index: 1;
-  max-inline-size: 375px;
+  grid-column: 1;
+  min-inline-size: 0;
   margin: 0;
-  padding-inline-end: 24px;
   color: var(--color-rdt-muted);
   font-size: var(--text-rdt-body);
-  line-height: 24px;
+  line-height: var(--text-rdt-body--line-height);
 }
 
 .art {
-  position: absolute;
-  inset-inline-end: 16px;
-  inset-block-end: 12px;
-  inline-size: 26%;
-  max-block-size: 150px;
+  display: block;
+  grid-area: 2 / 2;
+  align-self: center;
+  inline-size: 100%;
   block-size: auto;
   object-fit: contain;
   pointer-events: none;
 }
 
-@media (min-width: 768px) and (max-width: 1199px) {
-  .content { min-block-size: 290px; }
-  .cardTitle { font-size: 24px; line-height: 30px; }
-  .cardDescription { max-inline-size: 82%; padding-inline-end: 0; }
-  .art { inline-size: 22%; inset-inline-end: 8px; inset-block-end: 12px; }
+@media (min-width: 1200px) {
+  .content {
+    display: block;
+    min-block-size: 166px;
+  }
+
+  .cardHeading { gap: 18px; }
+  .cardTitle { font-size: 28px; line-height: 32px; }
+
+  .cardDescription {
+    max-inline-size: min(480px, calc(100% - 146px));
+    margin-block-start: 15px;
+  }
+
+  .art {
+    position: absolute;
+  }
+
+  .transponderArt {
+    inset-block-start: 12px;
+    inset-inline-end: 0;
+    inline-size: 168px;
+    block-size: 135px;
+  }
+
+  .plateArt {
+    inset-block-start: 28px;
+    inset-inline-end: 24px;
+    inline-size: 145px;
+    block-size: 102px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heading { font-size: 40px; line-height: 48px; }
 }
 
 @media (max-width: 767px) {
-  .section { margin-block: 24px 40px; }
-  .heading { letter-spacing: -0.6px; }
-  .description { margin-block-end: 20px; }
+  .section { margin-block-start: 24px; }
+  .heading { font-size: 32px; line-height: 40px; }
+  .description { font-size: var(--text-rdt-body); line-height: var(--text-rdt-body--line-height); }
   .grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .content { min-block-size: 258px; padding: 18px; }
-  .cardTitle { font-size: 24px; line-height: 30px; }
-  .cardDescription { max-inline-size: 86%; padding-inline-end: 20px; }
-  .art { inline-size: 23%; inset-inline-end: 8px; inset-block-end: 8px; }
-}
-
-.details {
-  display: grid;
-  gap: 16px;
-  margin-block-start: 16px;
+  .content { padding: 17px; }
 }

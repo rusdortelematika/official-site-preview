@@ -5,7 +5,9 @@ type Locale = "ru" | "en";
 const copy = {
   ru: {
     heading: "Информация о штрафах",
-    description: "Порядок действий, если за неоплаченный проезд по платному участку ЮЛА вынесено постановление.",
+    situation: "Ситуация",
+    action: "Что нужно сделать",
+    description: "Порядок действий за неоплату проезд по платному участку автодороги.",
     items: [
       {
         title: "Оплата проезда в течение 20 дней",
@@ -32,6 +34,8 @@ const copy = {
   },
   en: {
     heading: "Information about fines",
+    situation: "Situation",
+    action: "What you need to do",
     description: "What to do if a penalty notice is issued for an unpaid journey on a YULA toll section.",
     items: [
       {
@@ -75,14 +79,28 @@ export default function TollFines({ locale = "ru" }: { locale?: Locale }) {
         <p class={styles.description}>{text.description}</p>
       </div>
 
-      <ul class={styles.list}>
-        {text.items.map((item) => (
-          <li class={styles.item} key={item.title}>
-            <h3 class={styles.itemTitle}>{item.title}</h3>
-            <p class={styles.description}>{item.description}</p>
-          </li>
-        ))}
-      </ul>
+      <div class={styles.tableShell}>
+        <table class={styles.table} aria-labelledby="toll-fines-title">
+          <colgroup>
+            <col class={styles.situationColumn} />
+            <col class={styles.actionColumn} />
+          </colgroup>
+          <thead>
+            <tr>
+              <th scope="col">{text.situation}</th>
+              <th scope="col">{text.action}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {text.items.map((item) => (
+              <tr key={item.title}>
+                <th class={styles.situation} scope="row">{item.title}</th>
+                <td class={styles.action}>{item.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <div class={styles.links}>
         {links.map((href, index) => (
