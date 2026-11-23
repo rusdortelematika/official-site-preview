@@ -1,4 +1,5 @@
 import { useEffect, useId, useState } from "preact/hooks";
+import RoadLoader from "../../common/RoadLoader/RoadLoader";
 import carIcon from "../../../assets/icons/home/vehicle-car.svg?url";
 import truckIcon from "../../../assets/icons/home/vehicle-truck.svg?url";
 import busIcon from "../../../assets/icons/home/vehicle-bus.svg?url";
@@ -374,7 +375,14 @@ export default function Tariffs({
                     ))}
                   </ul>
                 </>
-              ) : <p class={styles.resultHint} role="status">{text.calculateHint}</p>}
+              ) : (
+                <div class={styles.resultHint}>
+                  <div class={styles.resultLoader} aria-hidden="true">
+                    <RoadLoader size="100%" locale={locale} />
+                  </div>
+                  <p role="status">{text.calculateHint}</p>
+                </div>
+              )}
             </div>
           </>
         ) : (

@@ -87,7 +87,7 @@ export default function FreeFlow({ locale: initialLocale }: { locale: "ru" | "en
       const viewportHeight = window.innerHeight;
       const start = Math.min(top + window.scrollY, viewportHeight);
       const distance = Math.min(height, viewportHeight * 0.7);
-      // Continue the truck beyond the initial pass until it exits behind the next section.
+      // Continue both vehicles beyond the initial pass until they leave the visible road.
       const progress = reducedMotion.matches ? 0.26 : Math.min(2, Math.max(0, (start - top) / distance));
       const opacity = reducedMotion.matches ? 1 : Math.min(1, Math.max(0, (time - modelsLoadedAt) / 200));
       context.setTransform(bitmapWidth / width, 0, 0, bitmapHeight / height, 0, 0);

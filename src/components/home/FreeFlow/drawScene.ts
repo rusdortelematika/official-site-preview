@@ -28,7 +28,7 @@ function roadCurveForAspect(aspect: number) {
   const blend = Math.min(1, Math.max(0, (aspect - 2.15) / 1.35));
   if (!blend) return roadCurve;
 
-  // Start the extension beyond the full travel of both vehicles.
+  // Keep the initial pass on the original bend before extending the distant road.
   const join = 640;
   const transition = 230;
   const slope = 0.0003 * join - 0.000000066 * join * join;
@@ -182,17 +182,16 @@ export function drawScene(
   const { frame, car, truck, truckTexture } = models;
   const distance = narrow ? 345 : 490;
   const truckX = distance * (1 - 2 * progress);
-  const carProgress = Math.min(1, progress);
-  const carX = distance * (-.87 + 1.91 * carProgress);
+  const carX = distance * (-.87 + 1.91 * progress);
   const truckY = roadCurve(truckX) - 115;
-  const carY = roadCurve(carX) + 41;
-  const heading = (x: number) => Math.atan((roadCurve(x + 1) - roadCurve(x - 1)) / 2);
+  const carY = deckCurve(carX) + 41;
+  const heading = (x: number) => Math.atan((deckCurve(x + 1) - deckCurve(x - 1)) / 2);
   const truckHeading = heading(truckX) + Math.PI;
   const carHeading = heading(carX);
   const rendered = renderer.draw(ctx.canvas.width, ctx.canvas.height, width, height, project, [-.5893, .5893, .639], [
     { parts: frame },
     ...vehicleMeshes(truck, truckX, truckY, truckHeading, distance * 2 * progress, truckTexture),
-    ...vehicleMeshes(car, carX, carY, carHeading, distance * 1.91 * carProgress),
+    ...vehicleMeshes(car, carX, carY, carHeading, distance * 1.91 * progress),
   ]);
   if (!rendered) return false;
   ctx.save();

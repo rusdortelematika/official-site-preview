@@ -372,6 +372,10 @@
   line-height: var(--text-rdt-body--line-height);
 }
 
+.resultLoader {
+  inline-size: min(100%, 192px);
+}
+
 .unavailable {
   grid-column: 1 / -1;
   min-block-size: 488px;
