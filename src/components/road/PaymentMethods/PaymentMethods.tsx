@@ -52,7 +52,7 @@ export default function PaymentMethods({ locale = "ru" }: Props) {
   return (
     <section class={styles.section} id="payment-methods" aria-labelledby="payment-methods-title">
       <div class={styles.intro}>
-        <h1 class={styles.heading} id="payment-methods-title">{text.heading}</h1>
+        <h2 class={styles.heading} id="payment-methods-title">{text.heading}</h2>
         <p class={styles.description}>{text.description}</p>
       </div>
 
@@ -62,7 +62,7 @@ export default function PaymentMethods({ locale = "ru" }: Props) {
             <div class={styles.content}>
               <div class={styles.cardHeading}>
                 <span class={styles.icon}><img src={method.icon} width="24" height="24" alt="" /></span>
-                <h2 class={styles.cardTitle}>{text.methods[method.id].title}</h2>
+                <h3 class={styles.cardTitle}>{text.methods[method.id].title}</h3>
               </div>
               <p class={styles.cardDescription}>{text.methods[method.id].description}</p>
               <img

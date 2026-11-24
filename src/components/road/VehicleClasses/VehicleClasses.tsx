@@ -1,3 +1,4 @@
+import vehicleClasses from "../../../data/vehicle-classes.json";
 import styles from "./VehicleClasses.module.css";
 
 type Locale = "ru" | "en";
@@ -20,30 +21,6 @@ const copy = {
     vat: "including VAT",
   },
 };
-
-const vehicleClasses = [
-  {
-    id: 1,
-    description: {
-      ru: "Мотоциклы, легковые автомобили полной массой до 3 тонн (высотой до 2,1 м).",
-      en: "Motorcycles and passenger cars with a gross vehicle weight of up to 3 tonnes (up to 2.1 m high).",
-    },
-  },
-  {
-    id: 2,
-    description: {
-      ru: "Грузовые автомобили с 2 или 3 осями, микроавтобусы (высотой более 2,1 м).",
-      en: "Trucks with 2 or 3 axles and minibuses (over 2.1 m high).",
-    },
-  },
-  {
-    id: 3,
-    description: {
-      ru: "Грузовые автомобили с количеством осей 4 и более, автоприцепы (высотой более 2,1 м), автобусы.",
-      en: "Trucks with 4 or more axles, trailers (over 2.1 m high) and buses.",
-    },
-  },
-] as const;
 
 export default function VehicleClasses({ locale = "ru" }: { locale?: Locale }) {
   const text = copy[locale];

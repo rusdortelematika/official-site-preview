@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "test": true,
+  "roadStart": [
+    37.5974911,
+    55.5441666
+  ],
+  "roadEnd": [
+    37.9660055,
+    55.7204341
+  ],
+  "stops": [
+    {
+      "id": "solntsevo",
+      "coordinates": [
+        37.5974911,
+        55.5441666
+      ]
+    },
+    {
+      "id": "butovo",
+      "coordinates": [
+        37.6467025,
+        55.5341014
+      ]
+    },
+    {
+      "id": "vidnoye",
+      "coordinates": [
+        37.7445492,
+        55.53555
+      ]
+    },
+    {
+      "id": "lytkarino",
+      "coordinates": [
+        37.9185281,
+        55.606346
+      ]
+    },
+    {
+      "id": "tomilino",
+      "coordinates": [
+        37.9706281,
+        55.6541689
+      ]
+    },
+    {
+      "id": "kraskovo",
+      "coordinates": [
+        37.9629403,
+        55.676432
+      ]
+    },
+    {
+      "id": "zheleznodorozhny",
+      "coordinates": [
+        37.9660055,
+        55.7204341
+      ]
+    }
+  ]
+}

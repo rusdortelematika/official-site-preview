@@ -1,65 +1,460 @@
 {
   "version": 1,
+  "source": {
+    "file": "СБВЛТКЖ_v2_14-10-2026_16-22-06.geojson",
+    "coordinateOrder": [
+      "longitude",
+      "latitude"
+    ],
+    "matchedBy": "picket",
+    "sharedPickets": [
+      "210+00"
+    ]
+  },
   "items": [
     {
-      "id": "gantry-01",
-      "coordinates": [
-        37.6445352,
-        55.5351821
-      ],
+      "id": "rvp-07",
       "label": {
-        "ru": "Рамка 01",
-        "en": "Gantry 01"
+        "ru": "РВП-07",
+        "en": "RVP-07"
       },
-      "test": true
+      "coordinates": [
+        37.75006813491758,
+        55.53430703613251
+      ],
+      "section": {
+        "ru": "Видное → Каширское шоссе (ТР-2)",
+        "en": "Vidnoye → Kashirskoye Highway (TR-2)"
+      },
+      "carriageway": "outer",
+      "picket": "110+90",
+      "kilometer": "11+090",
+      "chainageMeters": 11090,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 110+90 Левая сторона"
     },
     {
-      "id": "gantry-02",
-      "coordinates": [
-        37.7452361,
-        55.5356224
-      ],
+      "id": "rvp-08",
       "label": {
-        "ru": "Рамка 02",
-        "en": "Gantry 02"
+        "ru": "РВП-08",
+        "en": "RVP-08"
       },
-      "test": true
+      "coordinates": [
+        37.75457145767207,
+        55.5342948143475
+      ],
+      "section": {
+        "ru": "Каширское шоссе (ТР-2) ← Видное",
+        "en": "Kashirskoye Highway (TR-2) ← Vidnoye"
+      },
+      "carriageway": "inner",
+      "picket": "113+60",
+      "kilometer": "11+360",
+      "chainageMeters": 11360,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 113+60 правая сторона"
     },
     {
-      "id": "gantry-03",
-      "coordinates": [
-        37.8374751,
-        55.544354
-      ],
+      "id": "rvp-09",
       "label": {
-        "ru": "Рамка 03",
-        "en": "Gantry 03"
+        "ru": "РВП-09",
+        "en": "RVP-09"
       },
-      "test": true
+      "coordinates": [
+        37.78012218650812,
+        55.535606198776634
+      ],
+      "section": {
+        "ru": "Каширское шоссе (ТР-2) → А-105 (ТР-3)",
+        "en": "Kashirskoye Highway (TR-2) → A-105 (TR-3)"
+      },
+      "carriageway": "outer",
+      "picket": "129+83",
+      "kilometer": "12+983",
+      "chainageMeters": 12983,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 129+83 Левая сторона"
     },
     {
-      "id": "gantry-04",
-      "coordinates": [
-        37.918198,
-        55.6064122
-      ],
+      "id": "rvp-10",
       "label": {
-        "ru": "Рамка 04",
-        "en": "Gantry 04"
+        "ru": "РВП-10",
+        "en": "RVP-10"
       },
-      "test": true
+      "coordinates": [
+        37.781930611114106,
+        55.53578771684456
+      ],
+      "section": {
+        "ru": "А-105 (ТР-3) ← Каширское шоссе (ТР-2)",
+        "en": "A-105 (TR-3) ← Kashirskoye Highway (TR-2)"
+      },
+      "carriageway": "inner",
+      "picket": "130+70",
+      "kilometer": "13+070",
+      "chainageMeters": 13070,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 130+70 правая сторона"
     },
     {
-      "id": "gantry-05",
-      "coordinates": [
-        37.9626809,
-        55.6763907
-      ],
+      "id": "rvp-11",
       "label": {
-        "ru": "Рамка 05",
-        "en": "Gantry 05"
+        "ru": "РВП-11",
+        "en": "RVP-11"
       },
-      "test": true
+      "coordinates": [
+        37.88952749206521,
+        55.53618307152821
+      ],
+      "section": {
+        "ru": "А-105 (ТР-3) → Володарское шоссе (ТР-4)",
+        "en": "A-105 (TR-3) → Volodarskoye Highway (TR-4)"
+      },
+      "carriageway": "outer",
+      "picket": "210+00",
+      "kilometer": "21+000",
+      "chainageMeters": 21000,
+      "coordinateStatus": "shared",
+      "sourceCaption": "ПК 210+00 правая сторона"
+    },
+    {
+      "id": "rvp-12",
+      "label": {
+        "ru": "РВП-12",
+        "en": "RVP-12"
+      },
+      "coordinates": [
+        37.88952749206521,
+        55.53618307152821
+      ],
+      "section": {
+        "ru": "Володарское шоссе (ТР-4) ← А-105 (ТР-3)",
+        "en": "Volodarskoye Highway (TR-4) ← A-105 (TR-3)"
+      },
+      "carriageway": "inner",
+      "picket": "210+00",
+      "kilometer": "21+000",
+      "chainageMeters": 21000,
+      "coordinateStatus": "shared",
+      "sourceCaption": "ПК 210+00 правая сторона"
+    },
+    {
+      "id": "rvp-13",
+      "label": {
+        "ru": "РВП-13",
+        "en": "RVP-13"
+      },
+      "coordinates": [
+        37.89643352645824,
+        55.55177731137549
+      ],
+      "section": {
+        "ru": "Володарское шоссе (ТР-4) → мост через р. Москва",
+        "en": "Volodarskoye Highway (TR-4) → Moskva River bridge"
+      },
+      "carriageway": "outer",
+      "picket": "228+38",
+      "kilometer": "22+838",
+      "chainageMeters": 22838,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 228+38 правая сторона"
+    },
+    {
+      "id": "rvp-14",
+      "label": {
+        "ru": "РВП-14",
+        "en": "RVP-14"
+      },
+      "coordinates": [
+        37.896398949737105,
+        55.55066391770262
+      ],
+      "section": {
+        "ru": "мост через р. Москва ← Володарское шоссе (ТР-4)",
+        "en": "Moskva River bridge ← Volodarskoye Highway (TR-4)"
+      },
+      "carriageway": "inner",
+      "picket": "227+25",
+      "kilometer": "22+725",
+      "chainageMeters": 22725,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 227+25 Левая сторона"
+    },
+    {
+      "id": "rvp-15",
+      "label": {
+        "ru": "РВП-15",
+        "en": "RVP-15"
+      },
+      "coordinates": [
+        37.923200611113955,
+        55.56834114194704
+      ],
+      "section": {
+        "ru": "мост через р. Москва → Тураевское шоссе (ТР-6)",
+        "en": "Moskva River bridge → Turayevskoye Highway (TR-6)"
+      },
+      "carriageway": "outer",
+      "picket": "255+30",
+      "kilometer": "25+530",
+      "chainageMeters": 25530,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 255+30 Правая сторона"
+    },
+    {
+      "id": "rvp-16",
+      "label": {
+        "ru": "РВП-16",
+        "en": "RVP-16"
+      },
+      "coordinates": [
+        37.92215894973708,
+        55.56768312537263
+      ],
+      "section": {
+        "ru": "Тураевское шоссе (ТР-6) ← мост через р. Москва",
+        "en": "Turayevskoye Highway (TR-6) ← Moskva River bridge"
+      },
+      "carriageway": "inner",
+      "picket": "254+24",
+      "kilometer": "25+424",
+      "chainageMeters": 25424,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 254+24 Левая сторона"
+    },
+    {
+      "id": "rvp-17",
+      "label": {
+        "ru": "РВП-17",
+        "en": "RVP-17"
+      },
+      "coordinates": [
+        37.915372797622354,
+        55.59842999980506
+      ],
+      "section": {
+        "ru": "Тураевское шоссе (ТР-6) → Лыткаринское шоссе (ТР-7)",
+        "en": "Turayevskoye Highway (TR-6) → Lytkarinskoye Highway (TR-7)"
+      },
+      "carriageway": "outer",
+      "picket": "292+38",
+      "kilometer": "29+238",
+      "chainageMeters": 29238,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 292+38 Правая сторона"
+    },
+    {
+      "id": "rvp-18",
+      "label": {
+        "ru": "РВП-18",
+        "en": "RVP-18"
+      },
+      "coordinates": [
+        37.91649239021249,
+        55.60253385155542
+      ],
+      "section": {
+        "ru": "Лыткаринское шоссе (ТР-7) ← Тураевское шоссе (ТР-6)",
+        "en": "Lytkarinskoye Highway (TR-7) ← Turayevskoye Highway (TR-6)"
+      },
+      "carriageway": "inner",
+      "picket": "297+20",
+      "kilometer": "29+720",
+      "chainageMeters": 29720,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 297+20 Левая сторона"
+    },
+    {
+      "id": "rvp-19",
+      "label": {
+        "ru": "РВП-19",
+        "en": "RVP-19"
+      },
+      "coordinates": [
+        37.95581510185161,
+        55.61983607446232
+      ],
+      "section": {
+        "ru": "Лыткаринское шоссе (ТР-7) → Новорязанское шоссе (ТР-8)",
+        "en": "Lytkarinskoye Highway (TR-7) → Novoryazanskoye Highway (TR-8)"
+      },
+      "carriageway": "outer",
+      "picket": "330+30",
+      "kilometer": "33+030",
+      "chainageMeters": 33030,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 330+30 Правая сторона"
+    },
+    {
+      "id": "rvp-20",
+      "label": {
+        "ru": "РВП-20",
+        "en": "RVP-20"
+      },
+      "coordinates": [
+        37.946824373016156,
+        55.6168724911432
+      ],
+      "section": {
+        "ru": "Новорязанское шоссе (ТР-8) ← Лыткаринское шоссе (ТР-7)",
+        "en": "Novoryazanskoye Highway (TR-8) ← Lytkarinskoye Highway (TR-7)"
+      },
+      "carriageway": "inner",
+      "picket": "323+50",
+      "kilometer": "32+350",
+      "chainageMeters": 32350,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 323+50 Левая сторона"
+    },
+    {
+      "id": "rvp-21",
+      "label": {
+        "ru": "РВП-21",
+        "en": "RVP-21"
+      },
+      "coordinates": [
+        37.97112550926182,
+        55.64698618653991
+      ],
+      "section": {
+        "ru": "Новорязанское шоссе (ТР-8) → Егорьевское шоссе (ТР-9)",
+        "en": "Novoryazanskoye Highway (TR-8) → Yegoryevskoye Highway (TR-9)"
+      },
+      "carriageway": "outer",
+      "picket": "364+75",
+      "kilometer": "36+475",
+      "chainageMeters": 36475,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 364+75 Правая сторона",
+      "note": {
+        "ru": "Съезды ещё не открыты.",
+        "en": "Interchange ramps are not open yet."
+      }
+    },
+    {
+      "id": "rvp-22",
+      "label": {
+        "ru": "РВП-22",
+        "en": "RVP-22"
+      },
+      "coordinates": [
+        37.96942874603241,
+        55.64648865515503
+      ],
+      "section": {
+        "ru": "Егорьевское шоссе (ТР-9) ← Новорязанское шоссе (ТР-8)",
+        "en": "Yegoryevskoye Highway (TR-9) ← Novoryazanskoye Highway (TR-8)"
+      },
+      "carriageway": "inner",
+      "picket": "363+60",
+      "kilometer": "36+360",
+      "chainageMeters": 36360,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 363+60 Левая сторона",
+      "note": {
+        "ru": "Съезды ещё не открыты.",
+        "en": "Interchange ramps are not open yet."
+      }
+    },
+    {
+      "id": "rvp-23",
+      "label": {
+        "ru": "РВП-23",
+        "en": "RVP-23"
+      },
+      "coordinates": [
+        37.96771571296622,
+        55.66652819214165
+      ],
+      "section": {
+        "ru": "Егорьевское шоссе (ТР-9) → съезды/пересечения в районе ПК 394+56",
+        "en": "Yegoryevskoye Highway (TR-9) → ramps/intersections near chainage 39+456"
+      },
+      "carriageway": "outer",
+      "picket": "387+48",
+      "kilometer": "38+748",
+      "chainageMeters": 38748,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 387+48 Правая сторона",
+      "note": {
+        "ru": "Съезды/пересечения в районе ПК 394+56 ещё не открыты.",
+        "en": "Ramps/intersections near chainage 39+456 are not open yet."
+      }
+    },
+    {
+      "id": "rvp-24",
+      "label": {
+        "ru": "РВП-24",
+        "en": "RVP-24"
+      },
+      "coordinates": [
+        37.96573603439311,
+        55.67281244193852
+      ],
+      "section": {
+        "ru": "съезды/пересечения в районе ПК 394+56 ← Егорьевское шоссе (ТР-9)",
+        "en": "ramps/intersections near chainage 39+456 ← Yegoryevskoye Highway (TR-9)"
+      },
+      "carriageway": "inner",
+      "picket": "394+56",
+      "kilometer": "39+456",
+      "chainageMeters": 39456,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 394+56 Левая сторона",
+      "note": {
+        "ru": "Съезды/пересечения в районе ПК 394+56 ещё не открыты.",
+        "en": "Ramps/intersections near chainage 39+456 are not open yet."
+      }
+    },
+    {
+      "id": "rvp-25",
+      "label": {
+        "ru": "РВП-25",
+        "en": "RVP-25"
+      },
+      "coordinates": [
+        37.96825008598282,
+        55.70293846748601
+      ],
+      "section": {
+        "ru": "съезды/пересечения в районе ПК 394+56 → М-12 (ТР-10)",
+        "en": "ramps/intersections near chainage 39+456 → M-12 (TR-10)"
+      },
+      "carriageway": "outer",
+      "picket": "429+66",
+      "kilometer": "42+966",
+      "chainageMeters": 42966,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 429+66 Правая сторона",
+      "note": {
+        "ru": "Съезды ещё не открыты.",
+        "en": "Interchange ramps are not open yet."
+      }
+    },
+    {
+      "id": "rvp-26",
+      "label": {
+        "ru": "РВП-26",
+        "en": "RVP-26"
+      },
+      "coordinates": [
+        37.967913119048816,
+        55.70237999990664
+      ],
+      "section": {
+        "ru": "М-12 (ТР-10) ← съезды/пересечения в районе ПК 394+56",
+        "en": "M-12 (TR-10) ← ramps/intersections near chainage 39+456"
+      },
+      "carriageway": "inner",
+      "picket": "429+10",
+      "kilometer": "42+910",
+      "chainageMeters": 42910,
+      "coordinateStatus": "provided",
+      "sourceCaption": "ПК 429+10 Левая сторона",
+      "note": {
+        "ru": "Съезды ещё не открыты.",
+        "en": "Interchange ramps are not open yet."
+      }
     }
   ]
 }

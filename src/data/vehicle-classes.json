@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "category": "car",
+    "description": {
+      "ru": "Мотоциклы, легковые автомобили полной массой до 3 тонн (высотой до 2,1 м).",
+      "en": "Motorcycles and passenger cars with a gross vehicle weight of up to 3 tonnes (up to 2.1 m high)."
+    }
+  },
+  {
+    "id": 2,
+    "category": "truck",
+    "description": {
+      "ru": "Грузовые автомобили с 2 или 3 осями, микроавтобусы (высотой более 2,1 м).",
+      "en": "Trucks with 2 or 3 axles and minibuses (over 2.1 m high)."
+    }
+  },
+  {
+    "id": 3,
+    "category": "bus",
+    "description": {
+      "ru": "Грузовые автомобили с количеством осей 4 и более, автоприцепы (высотой более 2,1 м), автобусы.",
+      "en": "Trucks with 4 or more axles, trailers (over 2.1 m high) and buses."
+    }
+  }
+]

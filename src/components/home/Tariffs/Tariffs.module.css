@@ -41,7 +41,18 @@
   gap: 8px;
 }
 
+.categoryOption {
+  position: relative;
+  display: flex;
+  min-inline-size: 0;
+}
+
+.categoryOption[data-tooltip-active] {
+  z-index: 3;
+}
+
 .category {
+  flex: 1;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -54,6 +65,78 @@
   font-size: 13px;
   font-weight: 500;
   line-height: 18px;
+}
+
+.categoryTooltip {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: var(--tooltip-left, 0px);
+  inset-block-end: calc(100% + 12px);
+  inline-size: min(300px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: var(--radius-rdt-control);
+  background-color: var(--color-rdt-white);
+  box-shadow: 0 6px 24px rgb(29 45 77 / 16%);
+  color: var(--color-rdt-ink);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.categoryTooltip[data-open="true"] {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.categoryTooltip strong {
+  display: block;
+  margin-block-end: 6px;
+  color: var(--color-rdt-primary);
+  font-weight: 700;
+}
+
+/* Keep the popup open while the pointer crosses the gap to its text. */
+.categoryTooltip::before {
+  position: absolute;
+  inset-inline: -1px;
+  inset-block-start: 100%;
+  block-size: 13px;
+  content: "";
+}
+
+.categoryTooltip::after {
+  position: absolute;
+  inset-inline-start: calc(var(--tooltip-arrow, 24px) - 5px);
+  inset-block-end: -6px;
+  inline-size: 10px;
+  block-size: 10px;
+  rotate: 45deg;
+  border-inline-end: 1px solid var(--color-rdt-border);
+  border-block-end: 1px solid var(--color-rdt-border);
+  background-color: var(--color-rdt-white);
+  content: "";
+}
+
+.categoryTooltip[data-placement="bottom"] {
+  inset-block-start: calc(100% + 12px);
+  inset-block-end: auto;
+}
+
+.categoryTooltip[data-placement="bottom"]::before {
+  inset-block-start: auto;
+  inset-block-end: 100%;
+}
+
+.categoryTooltip[data-placement="bottom"]::after {
+  inset-block-start: -6px;
+  inset-block-end: auto;
+  rotate: 225deg;
 }
 
 .categoryIcon {
@@ -71,7 +154,12 @@
   color: var(--color-rdt-white);
 }
 
-.category:hover {
+.category:has(input:disabled) {
+  color: var(--color-rdt-muted);
+  cursor: default;
+}
+
+.category:not(:has(input:disabled)):hover {
   background-color: color-mix(in srgb, var(--color-rdt-border) 85%, var(--color-rdt-primary));
 }
 
@@ -180,7 +268,7 @@
   gap: 16px;
 }
 
-.calculate {
+.actionButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -196,18 +284,31 @@
   line-height: 24px;
 }
 
-.calculate img {
+.actionButton img {
   flex: none;
   inline-size: 22px;
   block-size: 22px;
 }
 
-.calculate:hover {
+.actionButton:hover {
   background-color: var(--color-rdt-primary);
 }
 
+.actionButton:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.paymentButton {
+  background-color: var(--color-rdt-payment);
+}
+
+.paymentButton:hover {
+  background-color: color-mix(in srgb, var(--color-rdt-payment) 90%, var(--color-rdt-ink));
+}
+
 .category,
-.calculate,
+.actionButton,
 .swap {
   transition: background-color 160ms ease;
 }
@@ -372,10 +473,6 @@
   line-height: var(--text-rdt-body--line-height);
 }
 
-.resultLoader {
-  inline-size: min(100%, 192px);
-}
-
 .unavailable {
   grid-column: 1 / -1;
   min-block-size: 488px;
@@ -437,7 +534,7 @@
     gap: 16px;
   }
 
-  .calculate {
+  .actionButton {
     align-self: start;
     min-inline-size: 254px;
     min-block-size: 52px;
@@ -586,13 +683,13 @@
     margin-block-start: -4px;
   }
 
-  .calculate {
+  .actionButton {
     min-inline-size: 296px;
     min-block-size: 64px;
     font-size: var(--text-rdt-action);
   }
 
-  .calculate img {
+  .actionButton img {
     inline-size: 28px;
     block-size: 28px;
   }

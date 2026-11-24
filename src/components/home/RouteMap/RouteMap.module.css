@@ -55,7 +55,7 @@
   inset-inline-start: 16px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 64px;
-  grid-template-rows: repeat(2, 64px);
+  grid-template-rows: repeat(3, 64px);
   align-content: start;
   gap: 12px;
   inline-size: calc(100% - 32px);
@@ -87,7 +87,7 @@
 }
 
 .alternativeButton[aria-pressed="true"] {
-  background-color: var(--color-rdt-action);
+  background-color: var(--color-rdt-muted);
   color: var(--color-rdt-white);
 }
 
@@ -110,89 +110,122 @@
   block-size: 64px;
 }
 
+.selectedButton {
+  grid-column: 1 / -1;
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  min-inline-size: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--color-rdt-payment);
+  border-radius: var(--radius-rdt-control);
+  color: var(--color-rdt-payment);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  text-align: center;
+}
+
+.selectedButton[aria-pressed="true"] {
+  background-color: var(--color-rdt-payment);
+  color: var(--color-rdt-white);
+}
+
+.selectedStops {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  overflow-wrap: anywhere;
+}
+
 .zoom {
   position: absolute;
   z-index: 2;
-  inset-block-start: 224px;
+  inset-block-start: 280px;
   inset-inline-end: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  inline-size: 56px;
-  block-size: 244px;
+  align-items: center;
+  gap: 8px;
+  inline-size: 44px;
+  block-size: 188px;
+  padding: 5px;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: 14px;
+  background-color: var(--color-rdt-white);
+  box-shadow: 0 4px 14px rgb(29 45 77 / 16%);
 }
 
 .zoomButton {
-  position: relative;
-  z-index: 1;
   display: grid;
+  flex: none;
   place-items: center;
-  inline-size: 56px;
-  block-size: 56px;
-  border-radius: var(--radius-rdt-small);
-  color: var(--color-rdt-muted);
+  inline-size: 32px;
+  block-size: 32px;
+  border-radius: 8px;
+  color: var(--color-rdt-ink);
 }
 
-.zoomIn > img {
-  position: absolute;
-  inset-block-start: -6px;
-  inset-inline-start: -8px;
-  max-inline-size: none;
+.zoomButton > span {
+  position: relative;
+  inline-size: 14px;
+  block-size: 14px;
   pointer-events: none;
 }
 
-.zoomOut {
-  background-color: var(--color-rdt-white);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+.zoomButton > span::before,
+.zoomIn > span::after {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 1px;
+  background-color: currentColor;
+  content: "";
 }
 
-.zoomOut > span {
-  inline-size: 28px;
-  block-size: 8px;
-  background-color: currentColor;
+.zoomButton > span::before {
+  inline-size: 14px;
+  block-size: 2px;
+}
+
+.zoomIn > span::after {
+  inline-size: 2px;
+  block-size: 14px;
 }
 
 .zoomRange {
-  position: absolute;
-  top: 48px;
-  left: 20px;
-  width: 16px;
-  height: 148px;
+  flex: 1;
+  min-height: 0;
+  width: 4px;
+  height: 88px;
   margin: 0;
   appearance: none;
   writing-mode: vertical-lr;
   direction: rtl;
-  background: linear-gradient(to right, var(--color-rdt-ink) 4px, var(--color-rdt-white) 4px 12px, var(--color-rdt-ink) 12px);
+  border-radius: 2px;
+  background-color: var(--color-rdt-border);
   cursor: pointer;
 }
 
 .zoomRange::-webkit-slider-thumb {
   box-sizing: border-box;
-  width: 56px;
-  height: 30px;
+  inline-size: 16px;
+  block-size: 16px;
   appearance: none;
-  border: solid var(--color-rdt-white);
-  border-width: 11px 18px;
-  border-radius: var(--radius-rdt-small);
-  background: radial-gradient(circle at 1px 1px, var(--color-rdt-muted) 1px, transparent 1.25px) 0 0 / 6px 6px;
-  background-color: var(--color-rdt-white);
-  background-origin: content-box;
-  background-clip: content-box;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+  border: 3px solid var(--color-rdt-white);
+  border-radius: 50%;
+  background-color: var(--color-rdt-primary);
+  box-shadow: 0 1px 5px rgb(29 45 77 / 24%);
 }
 
 .zoomRange::-moz-range-thumb {
   box-sizing: border-box;
-  width: 56px;
-  height: 30px;
-  border: solid var(--color-rdt-white);
-  border-width: 11px 18px;
-  border-radius: var(--radius-rdt-small);
-  background: radial-gradient(circle at 1px 1px, var(--color-rdt-muted) 1px, transparent 1.25px) 0 0 / 6px 6px;
-  background-color: var(--color-rdt-white);
-  background-origin: content-box;
-  background-clip: content-box;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 26%);
+  inline-size: 16px;
+  block-size: 16px;
+  border: 3px solid var(--color-rdt-white);
+  border-radius: 50%;
+  background-color: var(--color-rdt-primary);
+  box-shadow: 0 1px 5px rgb(29 45 77 / 24%);
 }
 
 .frame button,
@@ -220,9 +253,21 @@
   background-color: color-mix(in srgb, var(--color-rdt-border) 85%, var(--color-rdt-primary));
 }
 
+.selectedButton:hover {
+  background-color: color-mix(in srgb, var(--color-rdt-payment) 10%, var(--color-rdt-white));
+}
+
+.selectedButton[aria-pressed="true"]:hover {
+  background-color: color-mix(in srgb, var(--color-rdt-payment) 85%, var(--color-rdt-ink));
+}
+
 .zoomButton:hover {
+  background-color: var(--color-rdt-surface);
   color: var(--color-rdt-action);
-  filter: brightness(0.96);
+}
+
+.zoomButton:disabled {
+  opacity: 0.4;
 }
 
 .frame button:disabled {
@@ -239,16 +284,54 @@
 .gantry {
   display: grid;
   place-items: center;
-  inline-size: 40px;
-  block-size: 40px;
-  border: 2px solid var(--color-rdt-white);
-  border-radius: 50%;
-  background-color: var(--color-rdt-surface);
-  box-shadow: 0 2px 8px rgb(29 45 77 / 20%);
+  inline-size: 28px;
+  block-size: 28px;
+  border-radius: 6px;
+  background-color: transparent;
 }
 
-.gantry:hover {
-  background-color: var(--color-rdt-border);
+.gantry[hidden] {
+  display: none;
+}
+
+.gantry::before {
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--color-rdt-action);
+  border-radius: 5px;
+  background-color: var(--color-rdt-action);
+  content: "";
+}
+
+.gantry img {
+  position: relative;
+  inline-size: 14px;
+  block-size: 14px;
+  opacity: 1;
+  filter: brightness(0) invert(1);
+  pointer-events: none;
+}
+
+.gantry:hover::before,
+.gantry:focus-visible::before {
+  border-color: var(--color-rdt-primary);
+  background-color: var(--color-rdt-primary);
+  box-shadow: 0 2px 6px rgb(29 45 77 / 14%);
+}
+
+.gantry[data-on-route="true"]::before {
+  border-color: var(--color-rdt-payment);
+  background-color: var(--color-rdt-payment);
+}
+
+.gantry[data-on-route="true"]:hover::before,
+.gantry[data-on-route="true"]:focus-visible::before {
+  border-color: color-mix(in srgb, var(--color-rdt-payment) 85%, var(--color-rdt-ink));
+  background-color: color-mix(in srgb, var(--color-rdt-payment) 85%, var(--color-rdt-ink));
+}
+
+.frame :global(.maplibregl-popup) {
+  z-index: 3;
 }
 
 .frame :global(.maplibregl-popup-content) {
@@ -271,9 +354,48 @@
   line-height: var(--text-rdt-body--line-height);
 }
 
+.popupItems {
+  max-block-size: 220px;
+  margin-block-start: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.popupItem + .popupItem {
+  margin-block-start: 12px;
+  padding-block-start: 12px;
+  border-block-start: 1px solid var(--color-rdt-border);
+}
+
+.popupItemTitle {
+  margin-block-end: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.popupItem[data-on-route="true"] .popupItemTitle {
+  color: var(--color-rdt-payment);
+}
+
+.popupSection {
+  font-size: 14px;
+  line-height: 20px;
+}
+
 .popupCoordinates,
-.popupHint {
+.popupMetadata {
   margin-block-start: 6px;
+  color: var(--color-rdt-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.popupNote {
+  margin-block-start: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: var(--color-rdt-surface);
   color: var(--color-rdt-muted);
   font-size: 12px;
   line-height: 18px;
@@ -287,6 +409,23 @@
   line-height: 14px;
 }
 
+@media (max-width: 767px) {
+  .frame :global(.maplibregl-popup) {
+    inset: auto 12px 12px;
+    max-width: none !important;
+    transform: none !important;
+  }
+
+  .frame :global(.maplibregl-popup-tip) {
+    display: none;
+  }
+
+  .frame :global(.maplibregl-popup-content) {
+    inline-size: 100%;
+    padding: 16px;
+  }
+}
+
 @media (min-width: 768px) {
   .frame {
     block-size: 600px;
@@ -296,17 +435,26 @@
     inset-block-start: 32px;
     inset-inline-start: 32px;
     grid-template-columns: 280px minmax(0, 1fr);
-    grid-template-rows: repeat(2, 72px);
+    grid-template-rows: repeat(3, 72px);
     gap: 16px;
     inline-size: 472px;
-    block-size: 232px;
-    padding: 22px;
+      padding: 22px;
   }
 
   .roadButton,
   .alternativeButton {
     font-size: 20px;
     line-height: 24px;
+  }
+
+  .selectedButton {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .selectedStops {
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .distance {

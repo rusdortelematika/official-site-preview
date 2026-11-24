@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 16px;
   inline-size: min(calc(100% - 2 * var(--rdt-gutter)), var(--container-rdt-content));
-  margin: 40px auto 16px;
+  margin: 0 auto 16px;
   color: var(--color-rdt-ink);
   font-family: var(--font-rdt);
 }
@@ -137,7 +137,6 @@
 }
 
 @media (max-width: 767px) {
-  .section { margin-block-start: 24px; }
   .heading { font-size: 32px; line-height: 40px; }
   .description { font-size: var(--text-rdt-body); line-height: var(--text-rdt-body--line-height); }
   .grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }

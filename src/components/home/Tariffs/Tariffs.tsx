@@ -1,5 +1,4 @@
-import { useEffect, useId, useState } from "preact/hooks";
-import RoadLoader from "../../common/RoadLoader/RoadLoader";
+import { useEffect, useId, useMemo, useRef, useState } from "preact/hooks";
 import carIcon from "../../../assets/icons/home/vehicle-car.svg?url";
 import truckIcon from "../../../assets/icons/home/vehicle-truck.svg?url";
 import busIcon from "../../../assets/icons/home/vehicle-bus.svg?url";
@@ -12,6 +11,7 @@ import arrowIcon from "../../../assets/icons/home/arrow-right.svg?url";
 import ticketLeft from "../../../assets/pages/home/tariffs/ticket-left.svg?url";
 import ticketRight from "../../../assets/pages/home/tariffs/ticket-right.svg?url";
 import ticketNotch from "../../../assets/pages/home/tariffs/ticket-notch.svg?url";
+import vehicleClasses from "../../../data/vehicle-classes.json";
 import styles from "./Tariffs.module.css";
 
 type Locale = "ru" | "en";
@@ -48,17 +48,16 @@ const categoryIcons: Record<string, { src: string; width: number }> = {
 const copy = {
   ru: {
     title: "Тарифы на проезд",
-    categories: "Категория транспорта",
+    categories: "Класс транспорта",
     from: "Откуда",
     to: "Куда",
     day: "День недели",
     payment: "Оплата",
     swap: "Сменить направление",
-    calculate: "Рассчитать тариф",
+    pay: "Перейти к оплате",
     loading: "Загружаем тарифы…",
     loadError: "Не удалось загрузить тарифы.",
     retry: "Попробовать снова",
-    calculateHint: "Рассчитайте тариф для выбранного маршрута.",
     sameStop: "Выберите разные пункты въезда и выезда.",
     periods: "Тарифы по времени въезда",
     price: "Стоимость проезда",
@@ -68,17 +67,16 @@ const copy = {
   },
   en: {
     title: "Toll calculator",
-    categories: "Vehicle category",
+    categories: "Vehicle class",
     from: "From",
     to: "To",
     day: "Day of the week",
     payment: "Payment",
     swap: "Swap direction",
-    calculate: "Calculate toll",
+    pay: "Proceed to payment",
     loading: "Loading tolls…",
     loadError: "Unable to load tolls.",
     retry: "Try again",
-    calculateHint: "Calculate the toll for the selected route.",
     sameStop: "Choose different entry and exit points.",
     periods: "Tolls by entry time",
     price: "Toll",
@@ -178,11 +176,12 @@ export default function Tariffs({
   const id = useId();
   const [config, setConfig] = useState<TariffConfig | null>(null);
   const [selection, setSelection] = useState<Selection | null>(null);
-  const [result, setResult] = useState<Result | null>(null);
   const [periodId, setPeriodId] = useState("");
   const [loadError, setLoadError] = useState(false);
-  const [formError, setFormError] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [tooltip, setTooltip] = useState<{ category: string; placement: "top" | "bottom"; left: number; arrow: number } | null>(null);
+  const hoveredCategory = useRef<string | null>(null);
+  const focusedCategory = useRef<string | null>(null);
   const text = copy[locale];
 
   useEffect(() => {
@@ -196,7 +195,6 @@ export default function Tariffs({
         const data = validateConfig(await response.json());
         if (controller.signal.aborted) return;
         setSelection(data.defaults);
-        setResult(calculate(data, data.defaults));
         setPeriodId(data.defaults.period);
         setConfig(data);
       } catch {
@@ -206,11 +204,46 @@ export default function Tariffs({
     return () => controller.abort();
   }, [dataUrl, attempt]);
 
+  useEffect(() => {
+    document.dispatchEvent(new CustomEvent("rdt:tariff-route-change"));
+  }, [selection?.from, selection?.to, locale]);
+
+  useEffect(() => {
+    if (!tooltip) return;
+    const dismiss = (event: KeyboardEvent) => { if (event.key === "Escape") setTooltip(null); };
+    const close = () => setTooltip(null);
+    document.addEventListener("keydown", dismiss);
+    window.addEventListener("resize", close);
+    return () => {
+      document.removeEventListener("keydown", dismiss);
+      window.removeEventListener("resize", close);
+    };
+  }, [tooltip?.category]);
+
+  const showCategoryTooltip = (category: string, option: HTMLElement) => {
+    const bubble = option.querySelector<HTMLElement>('[role="tooltip"]');
+    if (!bubble) return;
+    const bounds = option.getBoundingClientRect();
+    const width = bubble.offsetWidth, height = bubble.offsetHeight;
+    const margin = 16, gap = 12;
+    const above = bounds.top - margin - gap;
+    const below = window.innerHeight - bounds.bottom - margin - gap;
+    const left = Math.max(margin, Math.min(bounds.left + (bounds.width - width) / 2, window.innerWidth - width - margin)) - bounds.left;
+    setTooltip({
+      category,
+      placement: above >= height || above >= below ? "top" : "bottom",
+      left,
+      arrow: Math.max(16, Math.min(width - 16, bounds.width / 2 - left)),
+    });
+  };
+
   const updateSelection = (update: Partial<Selection>) => {
     setSelection((current) => current ? { ...current, ...update } : current);
-    setResult(null);
-    setFormError(false);
   };
+  // Derive the receipt from the current controls so it cannot lag behind the form.
+  const result = useMemo(() => config && selection && selection.from !== selection.to
+    ? calculate(config, selection) : null, [config, selection]);
+  const formError = Boolean(config && selection && selection.from === selection.to);
   const currency = (kopecks: number) => new Intl.NumberFormat(locale === "ru" ? "ru-RU" : "en-US", {
     style: "currency", currency: "RUB", currencyDisplay: "narrowSymbol", minimumFractionDigits: 0, maximumFractionDigits: 2,
   }).format(kopecks / 100);
@@ -219,45 +252,96 @@ export default function Tariffs({
   const receiptTo = config?.stops.find((stop) => stop.id === result?.selection.to)?.label[locale];
 
   return (
-    <section id="tariffs" class={styles.section} aria-labelledby={`${id}-title`} aria-busy={!config && !loadError}>
+    <section
+      id="tariffs"
+      class={styles.section}
+      aria-labelledby={`${id}-title`}
+      aria-busy={!config && !loadError}
+      data-route-from={selection?.from}
+      data-route-to={selection?.to}
+      data-route-from-label={config?.stops.find(stop => stop.id === selection?.from)?.label[locale]}
+      data-route-to-label={config?.stops.find(stop => stop.id === selection?.to)?.label[locale]}
+    >
       <h2 id={`${id}-title`} class="sr-only">{text.title}</h2>
       <div class={styles.panels}>
         {config && selection ? (
           <>
             <form
               class={styles.form}
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (selection.from === selection.to) {
-                  setFormError(true);
-                  return;
-                }
-                setFormError(false);
-                setResult(calculate(config, selection));
-                setPeriodId(config.defaults.period);
-              }}
+              onSubmit={(event) => event.preventDefault()}
             >
               <fieldset class={styles.categories}>
                 <legend>{text.categories}</legend>
                 <div class={styles.categoryList}>
-                  {config.categories.map((category) => (
-                    <label class={styles.category} key={category.id}>
-                      <input
-                        class="sr-only"
-                        type="radio"
-                        name={`${id}-category`}
-                        value={category.id}
-                        checked={selection.category === category.id}
-                        onChange={() => updateSelection({ category: category.id })}
-                      />
-                      <span
-                        class={styles.categoryIcon}
-                        aria-hidden="true"
-                        style={{ maskImage: `url("${categoryIcons[category.id].src}")`, "--vehicle-width": `${categoryIcons[category.id].width}px` }}
-                      />
-                      <span>{category.label[locale]}</span>
-                    </label>
-                  ))}
+                  {config.categories.map((category) => {
+                    const vehicle = vehicleClasses.find((item) => item.category === category.id);
+                    const tooltipId = vehicle ? `${id}-${category.id}-description` : undefined;
+                    const isOpen = tooltip?.category === category.id;
+                    return (
+                      <div
+                        class={styles.categoryOption}
+                        key={category.id}
+                        data-category={category.id}
+                        data-tooltip-active={isOpen ? "" : undefined}
+                        onPointerEnter={(event) => {
+                          if (event.pointerType === "touch") return;
+                          hoveredCategory.current = category.id;
+                          showCategoryTooltip(category.id, event.currentTarget);
+                        }}
+                        onPointerLeave={() => {
+                          hoveredCategory.current = null;
+                          if (focusedCategory.current !== category.id) {
+                            setTooltip((current) => current?.category === category.id ? null : current);
+                          }
+                        }}
+                      >
+                        <label class={styles.category}>
+                          <input
+                            class="sr-only"
+                            type="radio"
+                            name={`${id}-category`}
+                            value={category.id}
+                            checked={selection.category === category.id}
+                            disabled={category.id === "other"}
+                            aria-describedby={tooltipId}
+                            onChange={() => updateSelection({ category: category.id })}
+                            onFocus={(event) => {
+                              if (!event.currentTarget.matches(":focus-visible")) return;
+                              focusedCategory.current = category.id;
+                              const option = event.currentTarget.parentElement?.parentElement;
+                              if (option) showCategoryTooltip(category.id, option);
+                            }}
+                            onBlur={() => {
+                              focusedCategory.current = null;
+                              if (hoveredCategory.current !== category.id) {
+                                setTooltip((current) => current?.category === category.id ? null : current);
+                              }
+                            }}
+                          />
+                          <span
+                            class={styles.categoryIcon}
+                            aria-hidden="true"
+                            style={{ maskImage: `url("${categoryIcons[category.id].src}")`, "--vehicle-width": `${categoryIcons[category.id].width}px` }}
+                          />
+                          <span>{category.label[locale]}</span>
+                        </label>
+                        {vehicle && (
+                          <span
+                            id={tooltipId}
+                            class={styles.categoryTooltip}
+                            role="tooltip"
+                            aria-hidden={!isOpen}
+                            data-open={isOpen ? "true" : "false"}
+                            data-placement={isOpen ? tooltip.placement : "top"}
+                            style={isOpen ? { "--tooltip-left": `${tooltip.left}px`, "--tooltip-arrow": `${tooltip.arrow}px` } : undefined}
+                          >
+                            <strong>{category.label[locale]}</strong>
+                            {vehicle.description[locale]}
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </fieldset>
 
@@ -326,8 +410,8 @@ export default function Tariffs({
               </div>
 
               {formError && <p id={`${id}-error`} class={styles.error} role="alert">{text.sameStop}</p>}
-              <button class={styles.calculate} type="submit">
-                {text.calculate}
+              <button class={`${styles.actionButton} ${styles.paymentButton}`} type="button" disabled={!result}>
+                {text.pay}
                 <img src={arrowIcon} alt="" />
               </button>
             </form>
@@ -377,10 +461,7 @@ export default function Tariffs({
                 </>
               ) : (
                 <div class={styles.resultHint}>
-                  <div class={styles.resultLoader} aria-hidden="true">
-                    <RoadLoader size="100%" locale={locale} />
-                  </div>
-                  <p role="status">{text.calculateHint}</p>
+                  <p>{text.sameStop}</p>
                 </div>
               )}
             </div>
@@ -388,7 +469,7 @@ export default function Tariffs({
         ) : (
           <div class={styles.unavailable} role="status">
             <p>{loadError ? text.loadError : text.loading}</p>
-            {loadError && <button type="button" class={styles.calculate} onClick={() => setAttempt((current) => current + 1)}>{text.retry}</button>}
+            {loadError && <button type="button" class={styles.actionButton} onClick={() => setAttempt((current) => current + 1)}>{text.retry}</button>}
             <noscript>{text.noScript}</noscript>
           </div>
         )}
