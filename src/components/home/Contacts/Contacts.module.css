@@ -123,6 +123,7 @@
 
 .illustration {
   position: relative;
+  display: block;
   inline-size: 100%;
   min-inline-size: 0;
   overflow: hidden;
@@ -185,5 +186,75 @@
   .grid {
     grid-template-columns: minmax(0, 784fr) minmax(0, 552fr);
     align-items: stretch;
+  }
+}
+
+
+.illustrationTitle {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 24px;
+  inset-inline-start: 24px;
+  max-inline-size: min(45%, 230px);
+  color: var(--color-rdt-white);
+  font-size: var(--text-rdt-card);
+  font-weight: 700;
+  line-height: var(--text-rdt-card--line-height);
+  text-wrap: balance;
+}
+
+.illustrationArrow {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: 24px;
+  inset-block-end: 24px;
+  display: grid;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  border: 1px solid var(--color-rdt-white);
+  border-radius: 50%;
+  color: var(--color-rdt-white);
+  font-size: 26px;
+  line-height: 1;
+}
+
+.section .illustration:hover {
+  color: var(--color-rdt-white);
+  background-color: color-mix(in srgb, var(--color-rdt-ink) 90%, var(--color-rdt-primary));
+}
+
+.section .illustration:focus-visible {
+  border-radius: var(--radius-rdt-card);
+  outline: 3px solid var(--color-rdt-primary);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .section .illustration {
+    transition: background-color 180ms ease;
+  }
+
+  .illustration > img {
+    transition: transform 180ms ease;
+  }
+
+  .illustration:hover > img {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 767px) {
+  .illustrationTitle {
+    inset-block-start: 20px;
+    inset-inline-start: 20px;
+  }
+
+  .illustrationArrow {
+    inset-inline-start: 20px;
+    inset-block-end: 20px;
+    inline-size: 36px;
+    block-size: 36px;
+    font-size: 24px;
   }
 }

@@ -19,6 +19,7 @@ const copy = {
     assistance: "Номер телефона",
     social: "Социальные сети",
     vk: "ВКонтакте",
+    progress: "Ну как там с сайтом?",
   },
   en: {
     heading: "Contacts",
@@ -26,11 +27,13 @@ const copy = {
     assistance: "Phone number",
     social: "Social media",
     vk: "VKontakte",
+    progress: "How’s the site coming along?",
   },
 };
 
 export function Contacts({ locale = "ru", socialLinks = {} }: ContactsProps) {
   const text = copy[locale];
+  const progressHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}progress/`;
   const contacts = [
     { label: text.email, value: "reception@rusdor-telematika.ru", href: "mailto:reception@rusdor-telematika.ru", icon: emailIcon },
     { label: text.assistance, value: "Скоро", href: "", icon: phoneIcon },
@@ -72,9 +75,11 @@ export function Contacts({ locale = "ru", socialLinks = {} }: ContactsProps) {
             </div>
           </li>
         </ul>
-        <div class={styles.illustration} aria-hidden="true">
+        <a class={styles.illustration} href={progressHref}>
+          <span class={styles.illustrationTitle}>{text.progress}</span>
           <img src={motorcyclist.src} width={motorcyclist.width} height={motorcyclist.height} alt="" loading="lazy" decoding="async" />
-        </div>
+          <span class={styles.illustrationArrow} aria-hidden="true">↗</span>
+        </a>
       </div>
     </section>
   );

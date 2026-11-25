@@ -1,0 +1,312 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import car from "../../assets/components/road-loader/car-top.webp?url";
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: "en" } }];
+}
+
+const locale = Astro.params.locale === "en" ? "en" : "ru";
+const progress = 80;
+const copy = {
+  ru: {
+    title: "Готовность сайта — РусДор Телематика",
+    heading: "Сайт готов на",
+    progress: "Готовность сайта",
+  },
+  en: {
+    title: "Website progress — RusDor Telematika",
+    heading: "Website progress",
+    progress: "Website readiness",
+  },
+};
+const text = copy[locale];
+---
+
+<SiteLayout
+  page="progress"
+  locale={locale}
+  title={text.title}
+  headerLinks={{
+    russian: `${import.meta.env.BASE_URL}progress/`,
+    english: `${import.meta.env.BASE_URL}en/progress/`,
+  }}
+>
+  <div class="scene" id="readiness" data-target={progress} data-cracked style={`--progress: ${progress}%`}>
+    <section class="readiness" aria-labelledby="readiness-title">
+      <h1 id="readiness-title">
+        {text.heading}
+        <span class="readiness-value" aria-hidden="true">
+          <span class="number" data-number={progress}>{progress}</span><span class="percent">%</span>
+        </span>
+        <span class="sr-only">{progress}%</span>
+      </h1>
+
+      <div class="road" role="progressbar" aria-label={text.progress} aria-valuemin="0" aria-valuemax="100" aria-valuenow={progress}>
+        <div class="road-fill"></div>
+      </div>
+    </section>
+
+    <img class="car" src={car} width="192" height="192" alt="" hidden />
+  </div>
+</SiteLayout>
+
+<script>
+  let mountedScene: HTMLElement | null = null;
+  let disposeReadiness: (() => void) | undefined;
+
+  function initializeReadiness() {
+    const scene = document.getElementById("readiness");
+    if (!scene || scene === mountedScene) return;
+    disposeReadiness?.();
+    mountedScene = scene;
+    const road = scene?.querySelector<HTMLElement>(".road");
+    const number = scene?.querySelector<HTMLElement>("[data-number]");
+    const car = scene?.querySelector<HTMLImageElement>(".car");
+    const target = Number(scene?.dataset.target);
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (scene && road && number && car && !motion.matches) {
+      const driveDuration = 3200;
+      const turnDuration = 560;
+      const exitDuration = 1060;
+      let frame = 0;
+      let start: number | undefined;
+      let displayed = target;
+
+      const setProgress = (value: number) => {
+        scene.style.setProperty("--progress", `${value}%`);
+        const integer = Math.floor(value);
+        if (integer === displayed) return;
+        displayed = integer;
+        number.textContent = String(integer);
+        road.setAttribute("aria-valuenow", String(integer));
+        if (integer === target) scene.dataset.cracked = "";
+      };
+
+      const measure = () => {
+        const area = scene.getBoundingClientRect();
+        const track = road.getBoundingClientRect();
+        const carSize = car.offsetWidth;
+        return {
+          left: track.left - area.left,
+          center: track.top - area.top + track.height / 2,
+          width: track.width,
+          turn: Math.max(52, Math.min(116, track.width * 0.14)),
+          drop: Math.max(48, Math.min(88, track.width * 0.1)),
+          beyond: area.width + carSize,
+        };
+      };
+
+      const position = (x: number, y: number, angle = 0) => {
+        car.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${angle}rad)`;
+      };
+
+      car.hidden = false;
+      let track = measure();
+      const observer = new ResizeObserver(() => { track = measure(); });
+      observer.observe(scene);
+      observer.observe(road);
+
+      const finish = () => {
+        cancelAnimationFrame(frame);
+        observer.disconnect();
+        motion.removeEventListener("change", onMotionChange);
+        setProgress(target);
+        car.hidden = true;
+      };
+
+      function onMotionChange(event: MediaQueryListEvent) {
+        if (event.matches) finish();
+      }
+
+      function animate(now: number) {
+        start ??= now;
+        const elapsed = now - start;
+        const turnStart = track.left + track.width * target / 100;
+
+        if (elapsed < driveDuration) {
+          const progress = elapsed / driveDuration;
+          const value = progress * target;
+          setProgress(value);
+          position(track.left + track.width * value / 100, track.center);
+        } else if (elapsed < driveDuration + turnDuration) {
+          const turn = (elapsed - driveDuration) / turnDuration;
+          const curve = turn * turn * (3 - 2 * turn);
+          const angle = Math.atan2(track.drop * 6 * turn * (1 - turn), track.turn);
+          setProgress(target);
+          position(turnStart + track.turn * turn, track.center + track.drop * curve, angle);
+        } else if (elapsed < driveDuration + turnDuration + exitDuration) {
+          const exit = (elapsed - driveDuration - turnDuration) / exitDuration;
+          const accelerated = 0.45 * exit + 0.55 * exit * exit;
+          const turnEnd = turnStart + track.turn;
+          setProgress(target);
+          position(turnEnd + (track.beyond - turnEnd) * accelerated, track.center + track.drop);
+        } else {
+          finish();
+          return;
+        }
+
+        frame = requestAnimationFrame(animate);
+      }
+
+      disposeReadiness = finish;
+      scene.removeAttribute("data-cracked");
+      scene.dataset.animateCounter = "";
+      setProgress(0);
+      position(track.left, track.center);
+      motion.addEventListener("change", onMotionChange);
+      frame = requestAnimationFrame(animate);
+    }
+  }
+
+  document.addEventListener("astro:before-swap", () => {
+    disposeReadiness?.();
+    disposeReadiness = undefined;
+    mountedScene = null;
+  });
+  document.addEventListener("astro:page-load", initializeReadiness);
+  initializeReadiness();
+</script>
+
+<style>
+  .scene {
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr;
+    flex: 1;
+    min-height: 0;
+    overflow: clip;
+    color: var(--color-rdt-ink);
+    background:
+      radial-gradient(ellipse at 50% 47%, #f0f6fe, transparent 67%),
+      var(--color-rdt-white);
+    font-family: var(--font-rdt);
+  }
+
+
+
+
+  .readiness {
+    display: grid;
+    align-content: center;
+    gap: clamp(36px, 6.5vw, 70px);
+    width: min(calc(100% - 2 * var(--rdt-gutter)), 960px);
+    margin-inline: auto;
+    padding-block: 40px clamp(104px, 13vw, 170px);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: clamp(28px, 4.5vw, 56px);
+    font-weight: 680;
+    line-height: 1.13;
+    letter-spacing: -0.04em;
+  }
+
+  .readiness-value {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.045em;
+    margin-block-start: clamp(10px, 1.5vw, 16px);
+    color: var(--color-rdt-primary);
+    font-size: clamp(96px, 16vw, 208px);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 0.9;
+    letter-spacing: -0.065em;
+  }
+
+  .percent {
+    font-size: 0.57em;
+    font-weight: 650;
+    letter-spacing: -0.055em;
+  }
+
+  .number {
+    position: relative;
+  }
+
+  .scene[data-cracked] .number {
+    color: transparent;
+  }
+
+  .scene[data-cracked] .number::before,
+  .scene[data-cracked] .number::after {
+    position: absolute;
+    inset: 0;
+    color: var(--color-rdt-primary);
+    transform: var(--rest);
+    content: attr(data-number);
+  }
+
+  .scene[data-cracked] .number::before {
+    --rest: translate(-0.024em, -0.008em);
+    --shift: translate(-0.086em, -0.025em) skewX(-6deg);
+    --rebound: translate(0.021em, -0.006em);
+    clip-path: polygon(-15% 0, 115% 0, 115% 46%, 72% 46%, 68% 51%, 47% 51%, 43% 47%, 24% 47%, 20% 50%, -15% 50%);
+  }
+
+  .scene[data-cracked] .number::after {
+    --rest: translate(0.032em, 0.007em);
+    --shift: translate(0.094em, 0.023em) skewX(6deg);
+    --rebound: translate(-0.016em, 0.005em);
+    clip-path: polygon(-15% 52%, 21% 52%, 25% 49%, 42% 49%, 46% 53%, 69% 53%, 73% 48%, 115% 48%, 115% 100%, -15% 100%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .scene[data-cracked][data-animate-counter] .number::before,
+    .scene[data-cracked][data-animate-counter] .number::after {
+      animation: counter-break 540ms ease-out both;
+    }
+  }
+
+  @keyframes counter-break {
+    0% { transform: none; }
+    19% { transform: var(--shift); }
+    38% { transform: var(--rebound); }
+    62% { transform: var(--shift); }
+    100% { transform: var(--rest); }
+  }
+
+  .road {
+    position: relative;
+    height: clamp(17px, 2.25vw, 27px);
+    border-radius: 999px;
+    overflow: hidden;
+    background: #e2ecf8;
+    box-shadow: inset 0 0 0 1px #d4e2f3;
+  }
+
+  .road-fill {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: var(--progress);
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--color-rdt-primary), var(--color-rdt-action));
+  }
+
+  .road::after {
+    position: absolute;
+    inset-inline: 10px;
+    top: calc(50% - 1px);
+    height: 2px;
+    background: repeating-linear-gradient(90deg, #fff 0 12px, transparent 12px 25px);
+    opacity: 0.86;
+    content: "";
+  }
+
+  .car {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: clamp(51px, 6.7vw, 84px);
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+    filter: drop-shadow(0 4px 6px rgb(29 45 77 / 0.27));
+  }
+</style>
