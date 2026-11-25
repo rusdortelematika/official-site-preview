@@ -62,7 +62,7 @@
   color: inherit;
   background: transparent;
   cursor: pointer;
-  transition: color 160ms ease, background-color 160ms ease;
+  transition: color 160ms ease;
 }
 
 .roadToggle svg {
@@ -74,12 +74,9 @@
 }
 
 .roadToggle:hover,
+.roadToggle[aria-expanded="true"],
 .roadItem:has(.roadToggle[aria-expanded="true"]) .roadLink {
   color: var(--color-rdt-primary);
-}
-
-.roadToggle:hover {
-  background-color: var(--color-rdt-surface);
 }
 
 .roadToggle:focus-visible {
