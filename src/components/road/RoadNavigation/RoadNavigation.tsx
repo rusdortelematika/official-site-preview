@@ -67,6 +67,12 @@ export default function RoadNavigation({ locale = "ru" }: { locale?: "ru" | "en"
       ref={navigationRef}
       class={`${styles.navigation}${open ? ` ${styles.expanded}` : ""}`}
       aria-label={text.label}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setOpen(true);
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") setOpen(false);
+      }}
     >
       <button
         ref={toggleRef}
