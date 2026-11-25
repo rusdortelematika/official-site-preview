@@ -2,6 +2,7 @@
 import RoadSideTrack from '../../components/common/RoadSideTrack/RoadSideTrack';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import RoadHero from '../../components/road/RoadHero/RoadHero';
+import PassageRecording from '../../components/road/PassageRecording/PassageRecording';
 import PaymentMethods from '../../components/road/PaymentMethods/PaymentMethods';
 import VehicleClasses from '../../components/road/VehicleClasses/VehicleClasses';
 import TollFines from '../../components/road/TollFines/TollFines';
@@ -30,7 +31,8 @@ const titles = {
 >
   <RoadSideTrack client:load transition:persist='page-road-side-track' transition:persist-props />
   <RoadHero client:load locale={locale} />
-  <PaymentMethods client:visible locale={locale} />
+  <PassageRecording client:visible locale={locale} />
+  <PaymentMethods locale={locale} />
   <VehicleClasses locale={locale} />
   <TollFines locale={locale} />
   <TrafficPolice locale={locale} />

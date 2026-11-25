@@ -1,4 +1,6 @@
 .header {
+  position: relative;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,6 +28,7 @@
 }
 
 .navigation {
+  position: relative;
   flex: none;
   inline-size: 517px;
 }
@@ -34,6 +37,112 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.roadTrigger {
+  display: flex;
+  align-items: center;
+}
+
+.navigationList .roadLink {
+  display: flex;
+  align-items: center;
+  min-block-size: 48px;
+}
+
+.roadToggle {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 28px;
+  block-size: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-rdt-small);
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.roadToggle svg {
+  transition: transform 180ms ease;
+}
+
+.roadToggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.roadToggle:hover,
+.roadItem:has(.roadToggle[aria-expanded="true"]) .roadLink {
+  color: var(--color-rdt-primary);
+}
+
+.roadToggle:hover {
+  background-color: var(--color-rdt-surface);
+}
+
+.roadToggle:focus-visible {
+  outline: 2px solid var(--color-rdt-primary);
+  outline-offset: 2px;
+}
+
+.roadMenu {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  inline-size: min(640px, calc(100vw - var(--rdt-gutter) * 2));
+  padding-block-start: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms;
+}
+
+.roadMenuOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.roadLinks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  max-block-size: min(420px, calc(100dvh - 156px));
+  overflow-y: auto;
+  padding: 20px;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: var(--radius-rdt-card);
+  background-color: var(--color-rdt-surface);
+  box-shadow: 0 16px 40px rgb(29 45 77 / 12%);
+  font-size: 18px;
+  line-height: 26px;
+  white-space: normal;
+}
+
+.navigationList .roadLinks a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-block-size: 56px;
+  padding: 12px 16px;
+  border-radius: var(--radius-rdt-control);
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.roadLinks a::after {
+  content: "↗";
+  flex: none;
+  color: var(--color-rdt-primary);
+}
+
+.roadLinks a:hover,
+.roadLinks a:focus-visible {
+  color: var(--color-rdt-primary);
+  background-color: var(--color-rdt-white);
 }
 
 .actions {
@@ -150,11 +259,25 @@
     line-height: var(--text-rdt-small--line-height);
   }
 
-  .responsive .navigationList a {
+  .responsive .navigationList > li > a,
+  .responsive .roadLink {
     display: grid;
     place-items: center;
     min-block-size: 48px;
     padding-inline: 10px;
+  }
+
+  .responsive .roadMenu {
+    inset-inline-start: 50%;
+    transform: translate(-50%, -6px);
+  }
+
+  .responsive .roadMenuOpen {
+    transform: translate(-50%, 0);
+  }
+
+  .responsive .roadLink {
+    padding-inline-end: 0;
   }
 
   .responsive .payment {
@@ -224,13 +347,50 @@
 
   .responsive .navigationList {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.05fr) minmax(0, 0.95fr) minmax(0, 0.75fr) minmax(0, 1fr);
     text-align: center;
   }
 
-  .responsive .navigationList a {
+  .responsive .navigationList > li > a,
+  .responsive .roadLink {
     min-block-size: 42px;
     padding-inline: 0;
+  }
+
+  .responsive .roadTrigger {
+    justify-content: center;
+  }
+
+  .responsive .roadLink {
+    min-block-size: 42px;
+  }
+
+  .responsive .roadToggle {
+    inline-size: 20px;
+    block-size: 42px;
+  }
+
+  .responsive .roadToggle svg {
+    inline-size: 12px;
+    block-size: 12px;
+  }
+
+  .responsive .roadMenu {
+    padding-block-start: 8px;
+    text-align: start;
+  }
+
+  .responsive .roadLinks {
+    gap: 4px;
+    padding: 12px;
+    border-radius: var(--radius-rdt-panel);
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .responsive .roadLinks a {
+    min-block-size: 44px;
+    padding: 10px 12px;
   }
 
   .responsive .fullLabel {
@@ -266,5 +426,20 @@
 
   .responsive .payment img {
     display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .responsive .roadLinks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roadMenu,
+  .roadToggle,
+  .roadToggle svg,
+  .roadLinks a {
+    transition: none;
   }
 }

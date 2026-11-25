@@ -11,7 +11,7 @@ const navigation = [
   ],
   [
     { key: "tariffs", ru: "Тарифы", en: "Tolls" },
-    { key: "paymentMethods", ru: "Способы оплаты", en: "Payment Methods" },
+    { key: "passageRecording", ru: "Фиксация проезда", en: "Passage Recording" },
     { key: "contacts", ru: "Контакты", en: "Contacts" },
   ],
   [

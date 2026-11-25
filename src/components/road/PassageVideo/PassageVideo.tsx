@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "preact/hooks";
-import transponderVideo from "../../../assets/pages/road/payment-methods/transponder.mp4?url";
-import plateVideo from "../../../assets/pages/road/payment-methods/number-plate.mp4?url";
-import transponderPoster from "../../../assets/pages/road/payment-methods/transponder-poster.jpg";
-import platePoster from "../../../assets/pages/road/payment-methods/number-plate-poster.jpg";
-import playIcon from "../../../assets/pages/road/payment-methods/play.svg?url";
-import pauseIcon from "../../../assets/pages/road/payment-methods/pause.svg?url";
-import styles from "./PaymentVideo.module.css";
+import transponderVideo from "../../../assets/pages/road/passage-recording/transponder.mp4?url";
+import plateVideo from "../../../assets/pages/road/passage-recording/number-plate.mp4?url";
+import transponderPoster from "../../../assets/pages/road/passage-recording/transponder-poster.jpg";
+import platePoster from "../../../assets/pages/road/passage-recording/number-plate-poster.jpg";
+import playIcon from "../../../assets/pages/road/passage-recording/play.svg?url";
+import pauseIcon from "../../../assets/pages/road/passage-recording/pause.svg?url";
+import styles from "./PassageVideo.module.css";
 
 const copy = {
   ru: {
@@ -27,7 +27,7 @@ interface Props {
   locale: "ru" | "en";
 }
 
-export default function PaymentVideo({ mode, locale }: Props) {
+export default function PassageVideo({ mode, locale }: Props) {
   const stageRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const pausedRef = useRef(false);
@@ -86,7 +86,7 @@ export default function PaymentVideo({ mode, locale }: Props) {
   }, [mode, locale]);
 
   return (
-    <div class={styles.media} data-payment-video={mode}>
+    <div class={styles.media} data-passage-video={mode}>
       <div class={styles.stage} ref={stageRef} role="img" aria-label={text[mode]}>
         <video
           ref={videoRef}

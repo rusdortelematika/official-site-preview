@@ -29,7 +29,7 @@ const isStatusPage = page === "404" || page === "maintenance";
     <ClientRouter fallback="swap" />
   </head>
   <body id="top" class:list={["flex min-h-dvh flex-col", isHome && "home-page", isStatusPage && "bg-[#f9fbfe]"]}>
-    <Header locale={locale} links={headerLinks} responsive={isStatusPage || showFooter} />
+    <Header client:load locale={locale} links={headerLinks} responsive={isStatusPage || showFooter} />
     <main class="flex-1">
       <slot />
     </main>
@@ -45,7 +45,7 @@ const isStatusPage = page === "404" || page === "maintenance";
       position: relative;
     }
 
-    .home-page > :global(header) {
+    .home-page :global(header) {
       position: absolute;
       z-index: 2;
       inset-block-start: 0;

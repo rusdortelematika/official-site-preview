@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import roadVideo from "../../../assets/pages/road/hero/road-drive.mp4?url";
 import roadPoster from "../../../assets/pages/road/hero/road-drive-poster.png";
-import playIcon from "../../../assets/pages/road/payment-methods/play.svg?url";
-import pauseIcon from "../../../assets/pages/road/payment-methods/pause.svg?url";
+import playIcon from "../../../assets/pages/road/passage-recording/play.svg?url";
+import pauseIcon from "../../../assets/pages/road/passage-recording/pause.svg?url";
+import RoadNavigation from "../RoadNavigation/RoadNavigation";
 import styles from "./RoadHero.module.css";
 
 const copy = {
@@ -93,6 +94,7 @@ export default function RoadHero({ locale = "ru" }: { locale?: "ru" | "en" }) {
             aria-hidden="true"
           />
         </div>
+        <RoadNavigation locale={locale} />
         <button
           class={styles.control}
           type="button"

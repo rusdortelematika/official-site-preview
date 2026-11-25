@@ -16,13 +16,15 @@
 
 .media {
   position: relative;
-  overflow: hidden;
+  z-index: 1;
   border-radius: 25px;
   background-color: var(--color-rdt-surface);
 }
 
 .stage {
   position: relative;
+  overflow: hidden;
+  border-radius: inherit;
   aspect-ratio: 1360 / 650;
 }
 
@@ -38,6 +40,7 @@
 
 .control {
   position: absolute;
+  z-index: 3;
   inset-inline-end: 16px;
   inset-block-end: 16px;
   display: grid;
@@ -70,6 +73,11 @@
   .section { margin-block-start: 12px; }
   .heading { font-size: 32px; line-height: 40px; }
   .media { border-radius: var(--radius-rdt-card-compact); }
+
+  .media:has([aria-controls="road-page-navigation"][aria-expanded="true"]) .control {
+    inset-block-start: 10px;
+    inset-block-end: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

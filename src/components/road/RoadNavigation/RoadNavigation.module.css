@@ -1,0 +1,201 @@
+.navigation {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 10px;
+  inset-inline-start: 10px;
+  inline-size: min(374px, calc(100% - 20px));
+  pointer-events: none;
+}
+
+.navigation:lang(en) { --navigation-link-font-size: 24px; }
+
+.toggle {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 10px;
+  inset-inline-start: 10.25px;
+  display: grid;
+  place-items: center;
+  inline-size: 49.184px;
+  block-size: 48px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-rdt-control);
+  color: var(--color-rdt-primary);
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 180ms ease;
+}
+
+.toggle:hover {
+  background: color-mix(in srgb, var(--color-rdt-white) 40%, transparent);
+}
+
+.toggle:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--color-rdt-primary);
+  outline-offset: 2px;
+}
+
+.menuIcon {
+  position: relative;
+  inline-size: 36px;
+  block-size: 32px;
+  transition: opacity 180ms ease, transform 280ms ease;
+}
+
+.menuIcon span {
+  position: absolute;
+  inset-inline: 0;
+  block-size: 4px;
+  border-radius: var(--radius-rdt-small);
+  background: currentColor;
+}
+
+.menuIcon span:nth-child(1) { inset-block-start: 3px; }
+.menuIcon span:nth-child(2) { inset-block-start: 14px; }
+.menuIcon span:nth-child(3) { inset-block-start: 25px; }
+
+.closeIcon {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(90deg) scale(0.65);
+  transition: opacity 180ms ease, transform 280ms ease;
+}
+
+.expanded .menuIcon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.65);
+}
+
+.expanded .closeIcon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.panel {
+  overflow: hidden;
+  border-radius: 25px;
+  background: color-mix(in srgb, var(--color-rdt-white) 40%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px) scale(0.96);
+  transform-origin: 34.842px 34px;
+  transition:
+    opacity 220ms ease,
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s 320ms;
+}
+
+.expanded .panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.links {
+  margin: 0;
+  padding: 58px 20px 23px 24.84px;
+  list-style: none;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  min-block-size: 52px;
+  padding-inline: 10px;
+  border-radius: var(--radius-rdt-control);
+  color: var(--color-rdt-ink);
+  font-size: var(--navigation-link-font-size, 32px);
+  font-weight: 500;
+  line-height: 52px;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--color-rdt-primary);
+  background: color-mix(in srgb, var(--color-rdt-white) 45%, transparent);
+  transform: translateX(4px);
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .links { padding-block-end: 20px; }
+  .link { min-block-size: 44px; font-size: 24px; line-height: 44px; }
+}
+
+@media (max-width: 767px) {
+  .navigation {
+    inset-block-start: 8px;
+    inset-inline-start: 8px;
+    inline-size: calc(100% - 16px);
+  }
+
+  .toggle {
+    inset-block-start: 4px;
+    inset-inline-start: 4px;
+    inline-size: 44px;
+    block-size: 44px;
+  }
+
+  .menuIcon {
+    inline-size: 30px;
+    block-size: 28px;
+  }
+
+  .menuIcon span { block-size: 3px; }
+  .menuIcon span:nth-child(1) { inset-block-start: 3px; }
+  .menuIcon span:nth-child(2) { inset-block-start: 12px; }
+  .menuIcon span:nth-child(3) { inset-block-start: 21px; }
+
+  .panel {
+    border-radius: var(--radius-rdt-card-compact);
+    background: color-mix(in srgb, var(--color-rdt-white) 80%, transparent);
+  }
+  .links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 4px;
+    padding: 48px 8px 8px;
+  }
+
+  .link {
+    min-block-size: 44px;
+    padding: 4px 6px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 479px) {
+  .navigation {
+    inset-block-start: 6px;
+    inset-inline-start: 6px;
+    inline-size: calc(100% - 12px);
+  }
+
+  .links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-block-start: 44px;
+  }
+
+  .link { font-size: 14px; line-height: 18px; }
+}
+
+@media (max-width: 359px) {
+  .links { padding-block-end: 4px; }
+  .link { min-block-size: 36px; font-size: 12px; line-height: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toggle,
+  .menuIcon,
+  .closeIcon,
+  .panel,
+  .link { transition: none; }
+}
