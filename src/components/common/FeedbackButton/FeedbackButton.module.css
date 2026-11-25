@@ -1,8 +1,5 @@
 .button {
-  position: fixed;
-  z-index: 20;
-  inset-inline-end: max(24px, env(safe-area-inset-right, 0px));
-  inset-block-end: max(24px, env(safe-area-inset-bottom, 0px));
+  pointer-events: auto;
   display: grid;
   place-items: center;
   inline-size: 64px;
@@ -48,8 +45,6 @@
 
 @media (max-width: 767px) {
   .button {
-    inset-inline-end: max(16px, env(safe-area-inset-right, 0px));
-    inset-block-end: max(16px, env(safe-area-inset-bottom, 0px));
     inline-size: 56px;
     block-size: 56px;
   }
