@@ -6,21 +6,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
   pointer-events: none;
 }
 
 .scrollTop {
   display: grid;
-  place-items: center;
+  place-items: end center;
   inline-size: 56px;
-  block-size: 56px;
+  block-size: 44px;
   padding: 0;
-  border: 2px solid var(--color-rdt-white);
-  border-radius: 50%;
-  background-color: var(--color-rdt-payment);
-  color: var(--color-rdt-white);
-  box-shadow: 0 4px 16px rgb(29 45 77 / 24%);
+  border: 0;
+  border-radius: var(--radius-rdt-small);
+  background: transparent;
+  color: var(--color-rdt-payment);
   cursor: pointer;
   opacity: 0;
   visibility: hidden;
@@ -36,23 +35,24 @@
 }
 
 .scrollTop:hover {
-  background-color: color-mix(in srgb, var(--color-rdt-payment) 90%, var(--color-rdt-ink));
-  box-shadow: 0 6px 20px rgb(29 45 77 / 30%);
+  color: color-mix(in srgb, var(--color-rdt-payment) 85%, var(--color-rdt-ink));
 }
 
 .scrollTop:focus-visible {
-  outline: 3px solid var(--color-rdt-payment);
+  outline: 2px solid var(--color-rdt-payment);
   outline-offset: 4px;
 }
 
 .arrow {
   display: block;
+  inline-size: 56px;
+  block-size: 36px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .scrollTop {
     transition: opacity 180ms ease, transform 180ms ease, visibility 0s 180ms,
-      background-color 160ms ease, box-shadow 160ms ease;
+      color 160ms ease;
   }
 
   .visible {
@@ -60,15 +60,15 @@
   }
 
   .visible .arrow {
-    animation: nudge-up 2.8s ease-in-out infinite;
+    animation: nudge-up 3.6s ease-in-out infinite;
   }
 }
 
 @keyframes nudge-up {
   0%, 60%, 100% { transform: translateY(0); }
-  70% { transform: translateY(-4px); }
+  70% { transform: translateY(-3px); }
   78% { transform: translateY(0); }
-  86% { transform: translateY(-2px); }
+  86% { transform: translateY(-1.5px); }
   94% { transform: translateY(0); }
 }
 
@@ -80,11 +80,11 @@
 
   .scrollTop {
     inline-size: 48px;
-    block-size: 48px;
+    block-size: 44px;
   }
 
   .arrow {
-    inline-size: 24px;
-    block-size: 24px;
+    inline-size: 48px;
+    block-size: 32px;
   }
 }

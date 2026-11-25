@@ -41,8 +41,8 @@ export default function FloatingActions({ locale = "ru" }: { locale?: "ru" | "en
         data-scroll-to-top
         onClick={scrollToTop}
       >
-        <svg class={styles.arrow} viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true">
-          <path d="m5 15 7-7 7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <svg class={styles.arrow} viewBox="0 0 32 20" width="56" height="36" fill="none" aria-hidden="true">
+          <path d="m3 16 13-12 13 12" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </button>
       <FeedbackButton locale={locale} />
