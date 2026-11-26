@@ -45,7 +45,7 @@ interface Props {
   paymentHref?: string;
 }
 
-export default function PaymentMethods({ locale = "ru", paymentHref }: Props) {
+export default function PaymentMethods({ locale = "ru", paymentHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}pay/` }: Props) {
   const text = copy[locale];
   const methods = [
     { id: "card", image: bankCard.src, width: bankCard.width, height: bankCard.height },
@@ -77,9 +77,6 @@ export default function PaymentMethods({ locale = "ru", paymentHref }: Props) {
         <a
           class={styles.payment}
           href={paymentHref}
-          role={paymentHref ? undefined : "link"}
-          aria-disabled={paymentHref ? undefined : true}
-          tabIndex={paymentHref ? undefined : -1}
         >
           <img class={styles.paymentIcon} src={paymentIcon} alt="" />
           <span>{text.pay}</span>

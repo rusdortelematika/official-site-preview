@@ -7,7 +7,7 @@ import { Header, type HeaderLocale } from "../components/layout/Header/Header";
 import "../styles/global.css";
 
 interface Props {
-  page: "home" | "road" | "rdt" | "progress" | "404" | "maintenance";
+  page: "home" | "road" | "rdt" | "progress" | "pay" | "404" | "maintenance";
   locale: HeaderLocale;
   title: string;
   headerLinks?: Parameters<typeof Header>[0]["links"];
@@ -16,6 +16,7 @@ interface Props {
 const { page, locale, title, headerLinks } = Astro.props;
 const isHome = page === "home";
 const isProgress = page === "progress";
+const isPay = page === "pay";
 const showFooter = page === "home" || page === "road" || page === "rdt";
 const isStatusPage = page === "404" || page === "maintenance";
 ---
@@ -30,12 +31,12 @@ const isStatusPage = page === "404" || page === "maintenance";
     <ClientRouter fallback="swap" />
   </head>
   <body id="top" class:list={["flex min-h-dvh flex-col", isHome && "home-page", isStatusPage && "bg-[#f9fbfe]"]}>
-    <Header client:load locale={locale} links={headerLinks} responsive={isStatusPage || showFooter || isProgress} />
-    <main class:list={["flex-1", isProgress && "flex flex-col"]}>
+    <Header client:load locale={locale} links={headerLinks} responsive={isStatusPage || showFooter || isProgress || isPay} variant={isPay ? "payment" : "default"} />
+    <main class:list={["flex-1", (isProgress || isPay) && "flex flex-col"]}>
       <slot />
     </main>
     {showFooter && <Footer locale={locale} />}
-    {!isProgress && <FloatingActions client:load locale={locale} />}
+    {!isProgress && !isPay && <FloatingActions client:load locale={locale} />}
     <PageLoader client:load transition:persist="site-page-loader" transition:persist-props />
   </body>
 </html>

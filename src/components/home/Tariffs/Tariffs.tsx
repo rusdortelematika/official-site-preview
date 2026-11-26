@@ -421,10 +421,10 @@ export default function Tariffs({
               </div>
 
               {formError && <p id={`${id}-error`} class={styles.error} role="alert">{text.sameStop}</p>}
-              <button class={`${styles.actionButton} ${styles.paymentButton}`} type="button" disabled={!result}>
+              <a class={`${styles.actionButton} ${styles.paymentButton}`} href={`${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}pay/`}>
                 {text.pay}
                 <img src={arrowIcon} alt="" />
-              </button>
+              </a>
             </form>
 
             <div class={styles.ticket} aria-label={text.price}>

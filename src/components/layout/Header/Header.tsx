@@ -59,11 +59,14 @@ const copy = {
 interface HeaderProps {
   locale?: HeaderLocale;
   responsive?: boolean;
+  variant?: "default" | "payment";
   links?: Partial<Record<HeaderDestination, string>>;
 }
 
-export function Header({ locale = "ru", links = {}, responsive = false }: HeaderProps) {
+export function Header({ locale = "ru", links = {}, responsive = false, variant = "default" }: HeaderProps) {
   const labels = copy[locale];
+  const isPaymentHeader = variant === "payment";
+  const paymentHref = links.payment ?? `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}pay/`;
   const homeHref = locale === "ru" ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}en/`;
   const roadHref = links.road ?? `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}road/`;
   const [roadOpen, setRoadOpen] = useState(false);
@@ -96,7 +99,7 @@ export function Header({ locale = "ru", links = {}, responsive = false }: Header
   }, [roadOpen]);
 
   return (
-    <header class={responsive ? `${styles.header} ${styles.responsive}` : styles.header} lang={locale}>
+    <header class={[styles.header, responsive && styles.responsive, isPaymentHeader && styles.paymentHeader].filter(Boolean).join(" ")} lang={locale}>
       <a class={styles.brand} href={homeHref}>
         <img src={brandMark} alt="" width="48" height="48" />
         <span>
@@ -106,7 +109,7 @@ export function Header({ locale = "ru", links = {}, responsive = false }: Header
         </span>
       </a>
 
-      <nav class={styles.navigation} aria-label={labels.navigation}>
+      {!isPaymentHeader && <nav class={styles.navigation} aria-label={labels.navigation}>
         <ul class={styles.navigationList}>
           {navigation.map((item) => {
             if (item.key === "road") {
@@ -189,7 +192,7 @@ export function Header({ locale = "ru", links = {}, responsive = false }: Header
             );
           })}
         </ul>
-      </nav>
+      </nav>}
 
       <div class={styles.actions}>
         <div class={styles.languages} role="group" aria-label={labels.languages}>
@@ -208,15 +211,10 @@ export function Header({ locale = "ru", links = {}, responsive = false }: Header
           ))}
         </div>
 
-        <a
-          class={styles.payment}
-          href={links.payment}
-          role={links.payment ? undefined : "link"}
-          aria-disabled={links.payment ? undefined : true}
-        >
+        {!isPaymentHeader && <a class={styles.payment} href={paymentHref}>
           <img src={cardIcon} alt="" />
           {labels.payment}
-        </a>
+        </a>}
       </div>
     </header>
   );

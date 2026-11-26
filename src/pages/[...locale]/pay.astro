@@ -1,0 +1,26 @@
+---
+import PaymentSearch from '../../components/pay/PaymentSearch/PaymentSearch';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+
+export function getStaticPaths() {
+  return [{ params: { locale: undefined } }, { params: { locale: 'en' } }];
+}
+
+const locale = Astro.params.locale === 'en' ? 'en' : 'ru';
+const titles = {
+  ru: 'Оплата проезда — РусДор Телематика',
+  en: 'Toll payment — RusDor Telematika',
+};
+---
+
+<SiteLayout
+  page="pay"
+  locale={locale}
+  title={titles[locale]}
+  headerLinks={{
+    russian: `${import.meta.env.BASE_URL}pay/`,
+    english: `${import.meta.env.BASE_URL}en/pay/`,
+  }}
+>
+  <PaymentSearch locale={locale} />
+</SiteLayout>
