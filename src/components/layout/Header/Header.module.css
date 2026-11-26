@@ -266,11 +266,8 @@
 
   .responsive .roadMenu {
     inset-inline-start: 50%;
-    transform: translate(-50%, -6px);
-  }
-
-  .responsive .roadMenuOpen {
-    transform: translate(-50%, 0);
+    /* Center immediately on resize; animate only the vertical opening. */
+    translate: -50% 0;
   }
 
   .responsive .roadLink {

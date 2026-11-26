@@ -1,4 +1,4 @@
-import { useEffect, useId, useMemo, useRef, useState } from "preact/hooks";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "preact/hooks";
 import carIcon from "../../../assets/icons/home/vehicle-car.svg?url";
 import truckIcon from "../../../assets/icons/home/vehicle-truck.svg?url";
 import busIcon from "../../../assets/icons/home/vehicle-bus.svg?url";
@@ -220,9 +220,13 @@ export default function Tariffs({
     };
   }, [tooltip?.category]);
 
-  const showCategoryTooltip = (category: string, option: HTMLElement) => {
-    const bubble = option.querySelector<HTMLElement>('[role="tooltip"]');
-    if (!bubble) return;
+  // Measure only the open popup, before paint. Closed popups use display:none
+  // so their full width cannot enlarge the document on mobile Safari.
+  useLayoutEffect(() => {
+    if (!tooltip) return;
+    const bubble = document.getElementById(`${id}-${tooltip.category}-description`);
+    const option = bubble?.parentElement;
+    if (!bubble || !option) return;
     const bounds = option.getBoundingClientRect();
     const width = bubble.offsetWidth, height = bubble.offsetHeight;
     const margin = 16, gap = 12;
@@ -230,10 +234,17 @@ export default function Tariffs({
     const below = window.innerHeight - bounds.bottom - margin - gap;
     const left = Math.max(margin, Math.min(bounds.left + (bounds.width - width) / 2, window.innerWidth - width - margin)) - bounds.left;
     setTooltip({
-      category,
+      category: tooltip.category,
       placement: above >= height || above >= below ? "top" : "bottom",
       left,
       arrow: Math.max(16, Math.min(width - 16, bounds.width / 2 - left)),
+    });
+  }, [id, tooltip?.category, locale]);
+
+  const showCategoryTooltip = (category: string, option: HTMLElement) => {
+    if (!option.querySelector('[role="tooltip"]')) return;
+    setTooltip((current) => current?.category === category ? current : {
+      category, placement: "top", left: 0, arrow: 24,
     });
   };
 
