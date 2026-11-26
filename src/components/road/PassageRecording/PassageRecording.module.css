@@ -28,15 +28,9 @@
   line-height: 26px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 26px;
-}
-
 .card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 11fr);
   min-inline-size: 0;
   overflow: hidden;
   border: 1px solid var(--color-rdt-border);
@@ -45,96 +39,242 @@
 }
 
 .content {
-  position: relative;
-  flex: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 96px;
-  gap: 14px 12px;
-  padding: 19px;
-}
-
-.cardHeading {
   display: flex;
-  grid-column: 1 / -1;
-  align-items: flex-start;
-  gap: 12px;
+  flex-direction: column;
+  gap: 24px;
   min-inline-size: 0;
+  min-block-size: 480px;
+  padding: 32px;
 }
 
-.icon {
-  display: grid;
-  flex: none;
-  place-items: center;
-  inline-size: 40px;
-  block-size: 40px;
+.switcher {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.mode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-inline-size: 0;
+  min-block-size: 48px;
+  padding: 12px 16px;
+  border: 0;
   border-radius: var(--radius-rdt-control);
-  background: var(--color-rdt-border);
+  background: transparent;
+  color: var(--color-rdt-muted);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: start;
 }
 
-.cardTitle {
+.mode img {
+  flex: none;
+}
+
+.mode[aria-pressed="true"] {
+  background: var(--color-rdt-white);
+  color: var(--color-rdt-primary);
+}
+
+.mode:hover {
+  color: var(--color-rdt-primary);
+  background: color-mix(in srgb, var(--color-rdt-white) 70%, transparent);
+}
+
+.mode:focus-visible {
+  outline: 2px solid var(--color-rdt-primary);
+  outline-offset: 3px;
+}
+
+.details {
+  display: grid;
+  flex: 1;
   min-inline-size: 0;
+}
+
+/* Both descriptions reserve the same space, including on narrow screens. */
+.detailPane {
+  display: flex;
+  grid-area: 1 / 1;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 24px;
+  min-inline-size: 0;
+}
+
+.detailPane[aria-hidden="true"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.explanation {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  line-height: 30px;
-  letter-spacing: -0.5px;
+  line-height: 32px;
 }
 
-.cardDescription {
-  grid-column: 1;
-  min-inline-size: 0;
+.body {
   margin: 0;
   color: var(--color-rdt-muted);
   font-size: var(--text-rdt-body);
   line-height: var(--text-rdt-body--line-height);
 }
 
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-inline-size: 0;
+}
+
 .art {
   display: block;
-  grid-area: 2 / 2;
-  align-self: center;
-  inline-size: 100%;
-  block-size: auto;
+  flex: none;
+  inline-size: 180px;
+  block-size: 141px;
   object-fit: contain;
   pointer-events: none;
 }
 
-@media (min-width: 1200px) {
-  .content {
-    display: block;
-    min-block-size: 166px;
-  }
+.benefitCopy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-inline-size: 0;
+}
 
-  .cardHeading { gap: 18px; }
-  .cardTitle { font-size: 28px; line-height: 32px; }
+.benefitTitle {
+  margin: 0;
+  color: var(--color-rdt-primary);
+  font-size: var(--text-rdt-body);
+  font-weight: 500;
+  line-height: var(--text-rdt-body--line-height);
+}
 
-  .cardDescription {
-    max-inline-size: min(480px, calc(100% - 146px));
-    margin-block-start: 15px;
-  }
+.hint {
+  margin: 0;
+  color: var(--color-rdt-muted);
+  font-size: var(--text-rdt-small);
+  line-height: var(--text-rdt-small--line-height);
+}
 
-  .art {
-    position: absolute;
-  }
+.scene {
+  position: relative;
+  align-self: stretch;
+  inline-size: 100%;
+  min-inline-size: 0;
+  aspect-ratio: 11 / 6;
+}
 
-  .transponderArt {
-    inset-block-start: 12px;
-    inset-inline-end: 0;
-    inline-size: 168px;
-    block-size: 135px;
-  }
+.player {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #f4f7fd;
+}
 
-  .plateContent .cardDescription {
-    max-inline-size: min(480px, calc(100% - 208px));
-  }
+.playerStage {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  container-type: size;
+}
 
-  .plateArt {
-    inset-block-start: 16px;
-    inset-inline-end: 16px;
-    inline-size: 192px;
-    block-size: auto;
-    aspect-ratio: 1276 / 829;
-  }
+.videoCanvas {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 30%;
+  inline-size: max(100cqw, calc(100cqh * 4 / 3));
+  aspect-ratio: 4 / 3;
+  /* Both edited clips share one gantry and the same framing. */
+  transform: translate(-50%, -30%);
+}
+
+.clip {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.clip[data-active="true"] { opacity: 1; }
+
+/* Keep the lower clip opaque throughout the dissolve to avoid a pale flash. */
+.plateClip {
+  z-index: 1;
+  opacity: 0;
+}
+
+.videoControl {
+  position: absolute;
+  inset-inline-end: 24px;
+  inset-block-end: 24px;
+  display: grid;
+  place-items: center;
+  inline-size: 48px;
+  block-size: 48px;
+  padding: 0;
+  border: 1px solid var(--color-rdt-border);
+  border-radius: 50%;
+  background: var(--color-rdt-white);
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.videoControl:hover {
+  border-color: var(--color-rdt-primary);
+  background: var(--color-rdt-border);
+}
+
+.videoControl:focus-visible {
+  outline: 3px solid var(--color-rdt-primary);
+  outline-offset: 3px;
+}
+
+.videoError {
+  position: absolute;
+  inset-inline: 16px;
+  inset-block-start: 16px;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-rdt-control);
+  background: var(--color-rdt-white);
+  color: var(--color-rdt-muted);
+  font-size: var(--text-rdt-small);
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .mode { font-size: 14px; line-height: 20px; }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .content { padding: 24px; }
+  .mode { gap: 6px; padding-inline: 8px; font-size: 14px; line-height: 20px; }
+  .title { font-size: 24px; line-height: 30px; }
+  .art { inline-size: 104px; block-size: 88px; }
+}
+
+@media (max-width: 1023px) {
+  .card { grid-template-columns: minmax(0, 1fr); }
+  .content { min-block-size: 0; padding: 24px; gap: 24px; }
+  .detailPane { gap: 24px; }
+  .benefit { max-inline-size: 440px; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -144,6 +284,28 @@
 @media (max-width: 767px) {
   .heading { font-size: 32px; line-height: 40px; }
   .description { font-size: var(--text-rdt-body); line-height: var(--text-rdt-body--line-height); }
-  .grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .content { padding: 17px; }
+  .content { padding: 20px; }
+  .mode { gap: 6px; padding: 10px 6px; font-size: 14px; line-height: 20px; }
+  .title { font-size: 24px; line-height: 30px; }
+  .art { inline-size: 104px; block-size: 88px; }
+  .scene { aspect-ratio: 4 / 3; }
+  .videoControl {
+    inset-inline-end: 16px;
+    inset-block-end: 16px;
+    inline-size: 40px;
+    block-size: 40px;
+  }
+}
+
+@media (max-width: 389px) {
+  .mode { flex-direction: column; text-align: center; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mode { transition: color 160ms ease, background-color 160ms ease; }
+  .clip { transition: opacity 180ms ease; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .videoControl { transition: none; }
 }
