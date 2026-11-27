@@ -16,12 +16,13 @@ const copy = {
 
 export function AboutCompany({ locale, href }: { locale: "ru" | "en"; href: string }) {
   const text = copy[locale];
+  const companyHref = `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}rdt/`;
 
   return (
     <section class={styles.section} id="about-company" aria-labelledby="about-company-title">
       <h2 id="about-company-title" class={styles.heading}>{text.heading}</h2>
       <div class={styles.companyGrid}>
-        <FeatureCard className={styles.company} title={text.company} tone="dark" arrow={whiteArrow} href={href}>
+        <FeatureCard className={styles.company} title={text.company} tone="dark" arrow={whiteArrow} href={companyHref}>
           <span class={`${styles.art} ${styles.roadScene}`}>
             <img class={styles.roadway} src={road.src} width={road.width} height={road.height} alt="" loading="lazy" decoding="async" />
             <img class={styles.roadCar} src={car.src} width={car.width} height={car.height} alt="" loading="lazy" decoding="async" />

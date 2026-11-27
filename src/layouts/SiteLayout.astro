@@ -28,6 +28,7 @@ const isStatusPage = page === "404" || page === "maintenance";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <slot name="head" />
     <ClientRouter fallback="swap" />
   </head>
   <body id="top" class:list={["flex min-h-dvh flex-col", isHome && "home-page", isStatusPage && "bg-[#f9fbfe]"]}>

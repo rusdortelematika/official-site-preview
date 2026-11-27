@@ -1,5 +1,8 @@
 ---
 import RoadSideTrack from "../../components/common/RoadSideTrack/RoadSideTrack";
+import companyModel from "../../assets/models/company/rdt-logo.glb?url";
+import companyPoster from "../../assets/models/company/rdt-logo-poster.webp?url";
+import CompanyHero from "../../components/company/CompanyHero/CompanyHero";
 import SiteLayout from "../../layouts/SiteLayout.astro";
 
 export function getStaticPaths() {
@@ -25,5 +28,10 @@ const titles = {
     english: `${import.meta.env.BASE_URL}en/rdt/`,
   }}
 >
+  <Fragment slot="head">
+    <link rel="preload" href={companyPoster} as="image" fetchpriority="high" />
+    <link rel="preload" href={companyModel} as="fetch" type="model/gltf-binary" crossorigin="anonymous" />
+  </Fragment>
   <RoadSideTrack client:load transition:persist="page-road-side-track" transition:persist-props />
+  <CompanyHero client:load locale={locale} transition:animate="none" />
 </SiteLayout>

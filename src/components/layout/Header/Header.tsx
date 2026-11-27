@@ -176,7 +176,9 @@ export function Header({ locale = "ru", links = {}, responsive = false, variant 
               );
             }
 
-            const href = links[item.key] ?? `${homeHref}#${item.sectionId}`;
+            const href = links[item.key] ?? (item.key === "company"
+              ? `${import.meta.env.BASE_URL}${locale === "en" ? "en/" : ""}rdt/`
+              : `${homeHref}#${item.sectionId}`);
 
             return (
               <li key={item.key}>
