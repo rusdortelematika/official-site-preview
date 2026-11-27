@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import { VIDEO_PLAYBACK_CONTROLS_ENABLED } from "../../../config/media";
 import transponderVideo from "../../../assets/pages/road/passage-recording/transponder.mp4?url";
 import plateVideo from "../../../assets/pages/road/passage-recording/number-plate.mp4?url";
 import transponderPoster from "../../../assets/pages/road/passage-recording/transponder-poster.jpg";
@@ -156,19 +157,21 @@ export default function PassageRecordingVideo({ mode, locale }: { mode: Mode; lo
         </div>
       </div>
       {error && <p class={styles.videoError} role="status">{text.error}</p>}
-      <button
-        class={styles.videoControl}
-        type="button"
-        aria-label={paused ? text.play : text.pause}
-        aria-pressed={paused}
-        onClick={() => {
-          pausedRef.current = !pausedRef.current;
-          setPaused(pausedRef.current);
-          syncRef.current();
-        }}
-      >
-        <img src={paused ? playIcon : pauseIcon} width="18" height="18" alt="" />
-      </button>
+      {VIDEO_PLAYBACK_CONTROLS_ENABLED && (
+        <button
+          class={styles.videoControl}
+          type="button"
+          aria-label={paused ? text.play : text.pause}
+          aria-pressed={paused}
+          onClick={() => {
+            pausedRef.current = !pausedRef.current;
+            setPaused(pausedRef.current);
+            syncRef.current();
+          }}
+        >
+          <img src={paused ? playIcon : pauseIcon} width="18" height="18" alt="" />
+        </button>
+      )}
     </div>
   );
 }

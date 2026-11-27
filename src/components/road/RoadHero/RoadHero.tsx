@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import { VIDEO_PLAYBACK_CONTROLS_ENABLED } from "../../../config/media";
 import roadVideo from "../../../assets/pages/road/hero/road-drive.mp4?url";
 import roadPoster from "../../../assets/pages/road/hero/road-drive-poster.png";
 import playIcon from "../../../assets/pages/road/passage-recording/play.svg?url";
@@ -95,19 +96,21 @@ export default function RoadHero({ locale = "ru" }: { locale?: "ru" | "en" }) {
           />
         </div>
         <RoadNavigation locale={locale} />
-        <button
-          class={styles.control}
-          type="button"
-          aria-label={paused ? text.play : text.pause}
-          aria-pressed={paused}
-          onClick={() => {
-            pausedRef.current = !pausedRef.current;
-            setPaused(pausedRef.current);
-            syncRef.current();
-          }}
-        >
-          <img src={paused ? playIcon : pauseIcon} width="24" height="24" alt="" />
-        </button>
+        {VIDEO_PLAYBACK_CONTROLS_ENABLED && (
+          <button
+            class={styles.control}
+            type="button"
+            aria-label={paused ? text.play : text.pause}
+            aria-pressed={paused}
+            onClick={() => {
+              pausedRef.current = !pausedRef.current;
+              setPaused(pausedRef.current);
+              syncRef.current();
+            }}
+          >
+            <img src={paused ? playIcon : pauseIcon} width="24" height="24" alt="" />
+          </button>
+        )}
       </div>
     </section>
   );
